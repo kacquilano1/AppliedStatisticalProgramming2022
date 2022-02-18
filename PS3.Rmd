@@ -190,7 +190,9 @@ validate_door_integer <- function(x){
   }
 } #end of validator function
 
-validate_door_integer(DoorA)
+#Test validator with YDoor
+validate_door_integer(YDoor)
+
 
 
 #Create a validator function, which will verify that the object is of class "door"
@@ -205,14 +207,12 @@ validate_door <- function(x){
   }
 } #end of validator function
 
-
+#Test validator with YDoor
+validate_door(YDoor)
 
 
 #Test the door function with the PlayGame method
-#Test validators
-validate_door(DoorA)
-validate_door_integer(DoorA)
-#Test PlayGame method on the Door_1 object created
-PlayGame(DoorA)
+#Test PlayGame method on the YDoor object created
+PlayGame(YDoor)
 
 ```
