@@ -1,5 +1,6 @@
 ---
 title: "Applied Statistical Programming - Spring 2022"
+Author: "Kimberly Acquilano"
 output: pdf_document
 ---
 
@@ -30,6 +31,23 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 
 \begin{enumerate}
   \item Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
+  
+```{r}
+#Create a new object called door
+#door has value of 1, 2, or 3
+door <- 1
+
+#Turn it into a class called "door"
+class(door) <- "door"
+
+#Test door object for correct value and class
+door
+
+
+
+```
+
+  
   \item Create a method for \texttt{door} objects that is called \texttt{PlayGame}. This method is supposed to do the following:
 \begin{itemize}
   \item take the numeric value that is stored in the \texttt{door} object,
@@ -44,5 +62,148 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \end{enumerate}
 
 ```{r tidy=TRUE}
-# Code
+
+#Create a new method called PlayGame
+PlayGame <- function(door) {
+  UseMethod("PlayGame")
+} #end of PlayGame function to create method
+
+
+#Fashion the method PlayGame for when it is used on door
+PlayGame.door <- function(door) {
+  #Store the value of door chosen by the contestant, and store it as Chosen
+  Chosen <- door
+  
+  #Draw a random number, 1-3, to indicate where the prize is.
+  #Call this random number Prize
+  Prize <- sample(c(1, 2, 3), 1)
+  
+  #Create an if statement
+  #If the values for Chosen and Prize are the same, print a "congratulations" message.
+  if (Chosen == Prize) {
+    print("Congratulations! You've won yourself a new car!!")
+  } #end of "if" statement
+  
+  #If the values for Chosen and Prize are not the same, print a "sympathies" message.
+  else if (Chosen != Prize) {
+    print("We're sorry. You did not win this time. Please try again!")
+  }#end of "else" if statement
+  
+} #end of PlayGame function
+
+#Test object door
+door
+#door is value of 1
+#Test PlayGame method with door. If the random prize is 1, it will print congrats message. If it is 2 or 3, it will print sorry message.
+PlayGame(door)
+
+
+######This function creates door and turns input into an integer####
+######
+######
+#Now create a function that allows the user to create a door object, anad will turn the input into an integer
+door <- function(x) {
+  #Make sure that the input is an numeric If it is not, throw an error
+  if (!(is.numeric(x))) {stop("Error: x is not a numeric")}
+  
+  #Make sure that the input is of value 1, 2, or 3. If it is not, throw an error.
+  #To do this create a vector of values 1, 2, and 3, CorrectValue
+  CorrectValue <- c(1, 2, 3)
+  
+  #Compare the input to the CorrectValue object
+  #If the input is contained in CorrectValue (meaning, it is  the number 1, 2, or 3), then turn the input into an integer
+  if ((x %in% CorrectValue)) {
+    x <- as.integer(x)
+  } #end of "if" statement
+  #If the input is not contained in CorrectValue, then throw an error message
+    else {
+    stop("Error: x does not have a value of 1, 2, or 3")
+  } #end of "else" statement
+  
+  #Assign class of "door" to the input
+  class(x) <- "door"
+  
+  return(x)
+} #end of door function
+
+#Test this function
+#Create an object a, with the value of 3
+a <- 3
+#Create an object, (Contest's guess), with the door function
+DoorA <- door(a)
+
+#####This input just creates door with a numeric and does not change its type
+######
+######
+##Now create a function that allows the user to create a door object
+door <- function(x) {
+  #Make sure that the input is a numeric. If it is not, throw an error
+  if (!(is.numeric(x))) {stop("Error: x is not a numeric")}
+  
+  #Make sure that the input is of value 1, 2, or 3. If it is not, throw an error.
+  #To do this create a vector of values 1, 2, and 3, CorrectValue
+  CorrectValue <- c(1, 2, 3)
+  
+  #Compare the input to the CorrectValue object
+  #If the input is not contained in CorrectValue (meaning, it is not the number 1, 2, or 3), then throw an error message
+  if (!(x %in% CorrectValue)) {
+    stop("Error: x does not have a value of 1, 2, or 3")
+  }
+  
+  #Assign class of "door" to the input
+  class(x) <- "door"
+  
+  return(x)
+} #end of door function
+
+
+#Test the function with different values
+x <- "a"
+door(x)
+door(12)
+door(1)
+door(2)
+d <- door(3)
+
+door(2.5)
+d
+
+
+#Create a validator function, which will verify that the object is an integer
+validate_door_integer <- function(x){
+  #if the type input is not an integer throw error message
+  if(!(is.integer(x))) {
+    stop("Object is not an integer")
+  } 
+  
+  #if it is an integer print an affirmation message
+  else { print("Yes, this is an integer")
+  }
+} #end of validator function
+
+validate_door_integer(DoorA)
+
+
+#Create a validator function, which will verify that the object is of class "door"
+validate_door <- function(x){
+  #if the class is not "door" throw error message
+  if(class(x) != "door") {
+    stop("Object is not of class door")
+  } 
+  
+  #if the class is "door" print an affirmation message
+  else { print("Yes, this is a door")
+  }
+} #end of validator function
+
+
+
+
+#Test the door function with the PlayGame method
+#Test validators
+validate_door(DoorA)
+validate_door_integer(DoorA)
+#Test PlayGame method on the Door_1 object created
+PlayGame(DoorA)
+
 ```
