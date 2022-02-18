@@ -35,13 +35,13 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 ```{r}
 #Create a new object called door
 #door has value of 1, 2, or 3
-door <- 1
+y <- 1
 
 #Turn it into a class called "door"
-class(door) <- "door"
+class(y) <- "door"
 
 #Test door object for correct value and class
-door
+y
 
 
 
@@ -92,12 +92,13 @@ PlayGame.door <- function(door) {
 } #end of PlayGame function
 
 #Test object door
-door
+y
 #door is value of 1
 #Test PlayGame method with door. If the random prize is 1, it will print congrats message. If it is 2 or 3, it will print sorry message.
-PlayGame(door)
+PlayGame(y)
 
 
+#Door Function 1##
 ######This function creates door and turns input into an integer####
 ######
 ######
@@ -126,12 +127,20 @@ door <- function(x) {
   return(x)
 } #end of door function
 
-#Test this function
-#Create an object a, with the value of 3
-a <- 3
+
+#Test this function with the y "door" created above
+YDoor <- door(y)
+YDoor
+
+#Test this function with a new object that does not conform
+#Create an object a, with the value of 2.5
+a <- 2.5
 #Create an object, (Contest's guess), with the door function
 DoorA <- door(a)
+#Cannot do this, throws an error
 
+
+##Door Function 2##
 #####This input just creates door with a numeric and does not change its type
 ######
 ######
