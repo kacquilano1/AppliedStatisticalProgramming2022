@@ -33,20 +33,20 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
   \item Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
   
 ```{r}
-#Create a new object called Door
-#Door has value of 1, 2, or 3, indicating the door chosen
-#The options are listed here. Player can see these option and choose which Door to 'open', by deleting the comment symbol of the chosen Door and making sure the others are commented-out.
-#For now, I will choose Door 1 (leaving it un-commented)
-Door <- 1
-#Door <- 2
-#Door <- 3
+#Create a new object called ContestantDoor
+#ContestantDoor has value of 1, 2, or 3, indicating the door chosen
+#The options are listed here. Player can see these option and choose which ContestantDoor to 'open', by deleting the comment symbol of the chosen ContestantDoor and making sure the others are commented-out.
+#For now, I will choose ContestantDoor = 1 (leaving it un-commented)
+ContestantDoor <- 1
+#ContestantDoor <- 2
+#ContestantDoor <- 3
 
-#create class "door" and assign it to the object Door
-class(Door) <- "door"
+#create class "door" and assign it to the object ContestantDoor
+class(ContestantDoor) <- "door"
 
-#Test object Door for correct value and class
-Door
-str(Door)
+#Test object ContestantDoor for correct value and class
+ContestantDoor
+str(ContestantDoor)
 
 
 ```
@@ -99,67 +99,22 @@ PlayGame.door <- function(door) {
 } #end of PlayGame function
 
 
-#Test PlayGame method with Door. If the random prize matches the value of the Door object, then the function will print congrats message. If it does not match, the function will print sorry message.
-#For example: If Door in question 1 was chosen to have a value of 1, then PlayGame will print the congrats message if the random prize matches 1. If the random prize is 2 or 3, then the sorry message will print
-PlayGame(Door)
+#Test PlayGame method with object ContestantDoor. If the random prize matches the value of the ContestantDoor object, then the function will print congrats message. If it does not match, the function will print sorry message.
+#For example: If ContestantDoor in question 1 was chosen to have a value of 1, then PlayGame will print the congrats message if the random prize matches 1. If the random prize is 2 or 3, then the sorry message will print
+PlayGame(ContestantDoor)
 
 
-#Door Function 1##
-######This function creates door and turns input into an integer####
-######
-######
-#Now create a function that allows the user to create a door object, anad will turn the input into an integer
-door <- function(x) {
-  #Make sure that the input is an numeric If it is not, throw an error
-  if (!(is.numeric(x))) {stop("Error: x is not a numeric")}
+#Now create a function that allows the user to create their own door object, called Door
+Door <- function(x) {
+  #Make sure that the function's input is a numeric. If it is not, throw an error
+  if (!(is.numeric(x))) {
+    stop("Error: x is not a numeric")
+    }
   
-  #Make sure that the input is of value 1, 2, or 3. If it is not, throw an error.
-  #To do this create a vector of values 1, 2, and 3, CorrectValue
+  #Make sure that the function's input is of value 1, 2, or 3. If it is not, throw an error.
+  #To do this create a vector of values 1, 2, and 3, called CorrectValue
   CorrectValue <- c(1, 2, 3)
-  
-  #Compare the input to the CorrectValue object
-  #If the input is contained in CorrectValue (meaning, it is  the number 1, 2, or 3), then turn the input into an integer
-  if ((x %in% CorrectValue)) {
-    x <- as.integer(x)
-  } #end of "if" statement
-  #If the input is not contained in CorrectValue, then throw an error message
-    else {
-    stop("Error: x does not have a value of 1, 2, or 3")
-  } #end of "else" statement
-  
-  #Assign class of "door" to the input
-  class(x) <- "door"
-  
-  return(x)
-} #end of door function
-
-
-#Test this function with the y "door" created above
-YDoor <- door(y)
-YDoor
-
-#Test this function with a new object that does not conform
-#Create an object a, with the value of 2.5
-a <- 2.5
-#Create an object, (Contest's guess), with the door function
-DoorA <- door(a)
-#Cannot do this, throws an error
-
-
-##Door Function 2##
-#####This input just creates door with a numeric and does not change its type
-######
-######
-##Now create a function that allows the user to create a door object
-door <- function(x) {
-  #Make sure that the input is a numeric. If it is not, throw an error
-  if (!(is.numeric(x))) {stop("Error: x is not a numeric")}
-  
-  #Make sure that the input is of value 1, 2, or 3. If it is not, throw an error.
-  #To do this create a vector of values 1, 2, and 3, CorrectValue
-  CorrectValue <- c(1, 2, 3)
-  
-  #Compare the input to the CorrectValue object
+    #Now, compare the input of the function to the CorrectValue object
   #If the input is not contained in CorrectValue (meaning, it is not the number 1, 2, or 3), then throw an error message
   if (!(x %in% CorrectValue)) {
     stop("Error: x does not have a value of 1, 2, or 3")
@@ -169,35 +124,60 @@ door <- function(x) {
   class(x) <- "door"
   
   return(x)
-} #end of door function
+} #end of Door function
 
 
-#Test the function with different values
+#Test the Door function with different values
 x <- "a"
-door(x)
-door(12)
-door(1)
-door(2)
-d <- door(3)
-
-door(2.5)
+Door(x)
+Door(12)
+Door(1)
+Door(2)
+d <- Door(3)
 d
+Door(2.5)
 
 
-#Create a validator function, which will verify that the object is an integer
+#Create a validator function, which will verify that the Door object is an integer of the correct value range
+#In this case, integer just means a whole number (instead of integer "type")
 validate_door_integer <- function(x){
-  #if the type input is not an integer throw error message
-  if(!(is.integer(x))) {
-    stop("Object is not an integer")
+  #verify that the input is a number
+  #if the type input is not a numeric
+  if(!(is.numeric(x))) {
+    #throw an error message
+    stop("Object is not a numeric")
   } 
   
-  #if it is an integer print an affirmation message
-  else { print("Yes, this is an integer")
+  #verify that the input is a whole number
+  #use the remainder function
+  #if the input has a remainder that does not equal 0
+  if(x %% 1 != 0) {
+    #throw an error message
+    stop("Object is not a whole number")
+  }
+  
+  #verify that the input is within the correct range of values
+  #verify that the input is between 1 and 3
+  #if the input is less than 1
+  if(x < 1) {
+    #throw an error message
+    stop("Object is not within the correct range")
+  }
+  #if the input is greater than 3
+  if (x > 3) {
+    #throw an error message
+    stop("Object is not within the correct range")
+  }
+  
+  #if it is in the correct form, a whole number between 1 and 3, print an affirmation message
+  else { print("Yes, this is in the correct type and ranger")
   }
 } #end of validator function
 
-#Test validator with YDoor
-validate_door_integer(YDoor)
+#Test validator 
+#Make an object, MyDoor equal to 1.5
+MyDoor <- 1.5
+validate_door_integer(MyDoor)
 
 
 
@@ -213,12 +193,12 @@ validate_door <- function(x){
   }
 } #end of validator function
 
-#Test validator with YDoor
-validate_door(YDoor)
+#Test validator with Door
+validate_door(Door(1))
 
 
 #Test the door function with the PlayGame method
-#Test PlayGame method on the YDoor object created
-PlayGame(YDoor)
+#Test PlayGame method on the Door object created
+PlayGame(Door(1))
 
 ```
