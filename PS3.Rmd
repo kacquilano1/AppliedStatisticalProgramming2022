@@ -33,9 +33,18 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
   \item Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
   
 ```{r}
-#Create a new object called door
-#door has value of 1, 2, or 3
+#Create a new object called Door
+#Door has value of 1, 2, or 3, indicating the door chosen
+#The options are listed here. Player can see these option and choose which Door to 'open', by deleting the comment symbol of the chosen Door and making sure the others are commented-out.
+#For now, I will choose Door 1 (leaving it un-commented)
+Door <- 1
+#Door <- 2
+#Door <- 3
 
+#create class "door" and assign it to the object Door
+class(Door) <- "door"
+
+#Test object Door for correct value and class
 Door
 str(Door)
 
@@ -87,10 +96,10 @@ PlayGame.door <- function(door) {
 } #end of PlayGame function
 
 #Test object door
-y
+Door
 #door is value of 1
 #Test PlayGame method with door. If the random prize is 1, it will print congrats message. If it is 2 or 3, it will print sorry message.
-PlayGame(y)
+PlayGame(Door[1])
 
 
 #Door Function 1##
