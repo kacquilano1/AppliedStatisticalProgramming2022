@@ -73,33 +73,35 @@ PlayGame <- function(door) {
 } #end of PlayGame function to create method
 
 
-#Fashion the method PlayGame for when it is used on door
+#Fashion the method PlayGame for when it is used on objects of door class
 PlayGame.door <- function(door) {
-  #Store the value of door chosen by the contestant, and store it as Chosen
+  #Store the value of Door chosen by the contestant, and store it as Chosen
   Chosen <- door
   
-  #Draw a random number, 1-3, to indicate where the prize is.
+  #Draw a random number, 1-3, to indicate where the prize actually is (behind door 1, 2, or 3).
   #Call this random number Prize
+  #Use sample function to draw from the numbers 1,2,3, with a sample size of 1.
   Prize <- sample(c(1, 2, 3), 1)
   
   #Create an if statement
-  #If the values for Chosen and Prize are the same, print a "congratulations" message.
+  #If the values for Chosen and Prize are the same
   if (Chosen == Prize) {
+    #Print a "congratulations" message.
     print("Congratulations! You've won yourself a new car!!")
   } #end of "if" statement
   
-  #If the values for Chosen and Prize are not the same, print a "sympathies" message.
+  #If the values for Chosen and Prize are not the same
   else if (Chosen != Prize) {
+    #print a "sympathies" message.
     print("We're sorry. You did not win this time. Please try again!")
-  }#end of "else" if statement
+  }#end of "else if" statement
   
 } #end of PlayGame function
 
-#Test object door
-Door
-#door is value of 1
-#Test PlayGame method with door. If the random prize is 1, it will print congrats message. If it is 2 or 3, it will print sorry message.
-PlayGame(Door[1])
+
+#Test PlayGame method with Door. If the random prize matches the value of the Door object, then the function will print congrats message. If it does not match, the function will print sorry message.
+#For example: If Door in question 1 was chosen to have a value of 1, then PlayGame will print the congrats message if the random prize matches 1. If the random prize is 2 or 3, then the sorry message will print
+PlayGame(Door)
 
 
 #Door Function 1##
