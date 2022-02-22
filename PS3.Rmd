@@ -129,13 +129,27 @@ Door <- function(x) {
 
 #Test the Door function with different values
 x <- "a"
+#Door(x) should throw an error for not being a numeric
 Door(x)
+#Door(12) should throw an error for being out of range
 Door(12)
+#Door(1) should work
 Door(1)
+#Door(2) should work
 Door(2)
+#Create object d, using Door function, with value of 3
 d <- Door(3)
+#should be value 3 and of class "door"
 d
+#Door(2.5) should throw an error for not being a whole number
 Door(2.5)
+
+
+#Test the door function with the PlayGame method
+#Test PlayGame method on the Door object created
+PlayGame(Door(1))
+#Test PlayGame method on object d created above with the Door function
+PlayGame(d)
 
 
 #Create a validator function, which will verify that the Door object is an integer of the correct value range
@@ -155,30 +169,21 @@ validate_door_integer <- function(x){
     #throw an error message
     stop("Object is not a whole number")
   }
-  
-  #verify that the input is within the correct range of values
-  #verify that the input is between 1 and 3
-  #if the input is less than 1
-  if(x < 1) {
-    #throw an error message
-    stop("Object is not within the correct range")
-  }
-  #if the input is greater than 3
-  if (x > 3) {
-    #throw an error message
-    stop("Object is not within the correct range")
-  }
-  
-  #if it is in the correct form, a whole number between 1 and 3, print an affirmation message
-  else { print("Yes, this is in the correct type and range")
+
+  #if it is in the correct form, a numeric and a whole number
+  else { 
+    #print an affirmation message
+    print("Yes, this is in integer form")
   }
 } #end of validator function
 
 #Test validator 
 #Make an object, MyDoor equal to 1.5
 MyDoor <- 1.5
+#validotor should throw a code for MyDoor not being a whole number
 validate_door_integer(MyDoor)
 #Test with ContestantDoor created in question 1
+#validator should print an affirmation message
 validate_door_integer(ContestantDoor)
 
 
@@ -199,8 +204,6 @@ validate_door <- function(x){
 validate_door(Door(1))
 
 
-#Test the door function with the PlayGame method
-#Test PlayGame method on the Door object created
-PlayGame(Door(1))
+
 
 ```
