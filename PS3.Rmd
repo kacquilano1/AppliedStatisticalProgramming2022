@@ -35,14 +35,9 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 ```{r}
 #Create a new object called door
 #door has value of 1, 2, or 3
-y <- 1
 
-#Turn it into a class called "door"
-class(y) <- "door"
-
-#Test door object for correct value and class
-y
-
+Door
+str(Door)
 
 
 ```
