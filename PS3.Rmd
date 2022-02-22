@@ -170,7 +170,7 @@ validate_door_integer <- function(x){
   }
   
   #if it is in the correct form, a whole number between 1 and 3, print an affirmation message
-  else { print("Yes, this is in the correct type and ranger")
+  else { print("Yes, this is in the correct type and range")
   }
 } #end of validator function
 
@@ -178,6 +178,8 @@ validate_door_integer <- function(x){
 #Make an object, MyDoor equal to 1.5
 MyDoor <- 1.5
 validate_door_integer(MyDoor)
+#Test with ContestantDoor created in question 1
+validate_door_integer(ContestantDoor)
 
 
 
