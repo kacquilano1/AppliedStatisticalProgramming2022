@@ -1,5 +1,6 @@
 ---
 title: "Applied Statistical Programming - Spring 2022"
+author: "Kimberly Acquilano"
 output: pdf_document
 ---
 
