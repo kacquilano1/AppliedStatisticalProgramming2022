@@ -5,7 +5,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, tidy = TRUE)
 ```
 
 \begin{center}
@@ -32,24 +32,7 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \begin{enumerate}
   \item Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
   
-```{r}
-#Create a new object called ContestantDoor
-#ContestantDoor has value of 1, 2, or 3, indicating the door chosen
-#The options are listed here. Player can see these option and choose which ContestantDoor to 'open', by deleting the comment symbol of the chosen ContestantDoor and making sure the others are commented-out.
-#For now, I will choose ContestantDoor = 1 (leaving it un-commented)
-ContestantDoor <- 1
-#ContestantDoor <- 2
-#ContestantDoor <- 3
 
-#create class "door" and assign it to the object ContestantDoor
-class(ContestantDoor) <- "door"
-
-#Test object ContestantDoor for correct value and class
-ContestantDoor
-str(ContestantDoor)
-
-
-```
 
   
   \item Create a method for \texttt{door} objects that is called \texttt{PlayGame}. This method is supposed to do the following:
@@ -65,7 +48,28 @@ str(ContestantDoor)
   \end{itemize}
 \end{enumerate}
 
-```{r tidy=TRUE}
+1.
+```{r}
+#Create a new object called ContestantDoor
+#ContestantDoor has value of 1, 2, or 3, indicating the door chosen
+#The options are listed here. Player can see these option and choose which ContestantDoor to 'open', by deleting the comment symbol of the chosen ContestantDoor and making sure the others are commented-out.
+#For now, I will choose ContestantDoor = 1 (leaving it un-commented)
+ContestantDoor <- 1
+#ContestantDoor <- 2
+#ContestantDoor <- 3
+
+#create class "door" and assign it to the object ContestantDoor
+class(ContestantDoor) <- "door"
+
+#Test object ContestantDoor for correct value and class
+#ContestantDoor
+#str(ContestantDoor)
+
+
+```
+
+2.
+```{r, tidy=TRUE}
 
 #Create a new method called PlayGame
 PlayGame <- function(door) {
@@ -99,9 +103,13 @@ PlayGame.door <- function(door) {
 } #end of PlayGame function
 
 
-#Test PlayGame method with object ContestantDoor. If the random prize matches the value of the ContestantDoor object, then the function will print congrats message. If it does not match, the function will print sorry message.
-#For example: If ContestantDoor in question 1 was chosen to have a value of 1, then PlayGame will print the congrats message if the random prize matches 1. If the random prize is 2 or 3, then the sorry message will print
-PlayGame(ContestantDoor)
+#Test PlayGame method with object ContestantDoor. If the random prize matches 
+#the value of the ContestantDoor object, then the function will print congrats message. 
+#If it does not match, the function will print sorry message.
+#For example: If ContestantDoor in question 1 was chosen to have a value of 1, 
+#then PlayGame will print the congrats message if the random prize matches 1. 
+#If the random prize is 2 or 3, then the sorry message will print
+#PlayGame(ContestantDoor)
 
 
 #Now create a function that allows the user to create their own door object, called Door
@@ -115,8 +123,9 @@ Door <- function(x) {
   #To do this create a vector of values 1, 2, and 3, called CorrectValue
   CorrectValue <- c(1, 2, 3)
     #Now, compare the input of the function to the CorrectValue object
-  #If the input is not contained in CorrectValue (meaning, it is not the number 1, 2, or 3), then throw an error message
+  #If the input is not contained in CorrectValue (meaning, it is not the number 1, 2, or 3),
   if (!(x %in% CorrectValue)) {
+    #throw an error message
     stop("Error: x does not have a value of 1, 2, or 3")
   }
   
@@ -128,31 +137,31 @@ Door <- function(x) {
 
 
 #Test the Door function with different values
-x <- "a"
+#x <- "a"
 #Door(x) should throw an error for not being a numeric
-Door(x)
+#Door(x)
 #Door(12) should throw an error for being out of range
-Door(12)
+#Door(12)
 #Door(1) should work
-Door(1)
+#Door(1)
 #Door(2) should work
-Door(2)
+#Door(2)
 #Create object d, using Door function, with value of 3
-d <- Door(3)
+#d <- Door(3)
 #should be value 3 and of class "door"
-d
+#d
 #Door(2.5) should throw an error for not being a whole number
-Door(2.5)
+#Door(2.5)
 
 
 #Test the door function with the PlayGame method
 #Test PlayGame method on the Door object created
-PlayGame(Door(1))
+#PlayGame(Door(1))
 #Test PlayGame method on object d created above with the Door function
-PlayGame(d)
+#PlayGame(d)
 
 
-#Create a validator function, which will verify that the Door object is an integer of the correct value range
+#Create a validator function, which will verify that the Door object is an integer 
 #In this case, integer just means a whole number (instead of integer "type")
 validate_door_integer <- function(x){
   #verify that the input is a number
@@ -179,12 +188,12 @@ validate_door_integer <- function(x){
 
 #Test validator 
 #Make an object, MyDoor equal to 1.5
-MyDoor <- 1.5
+#MyDoor <- 1.5
 #validotor should throw a code for MyDoor not being a whole number
-validate_door_integer(MyDoor)
+#validate_door_integer(MyDoor)
 #Test with ContestantDoor created in question 1
 #validator should print an affirmation message
-validate_door_integer(ContestantDoor)
+#validate_door_integer(ContestantDoor)
 
 
 
@@ -201,7 +210,7 @@ validate_door <- function(x){
 } #end of validator function
 
 #Test validator with Door
-validate_door(Door(1))
+#validate_door(Door(1))
 
 
 
