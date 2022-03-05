@@ -9,9 +9,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 \begin{center}
-{\Large{\textbf{Problem Set 3}}} \\
+{\Large{\textbf{Problem Set 4}}} \\
 \vspace{4 bp}
-Due Wednesday, March 16, 10:00 AM (Before Class) \\
+Due Wednesday, March 21, 10:00 AM (Before Class) \\
 \end{center}
 
 \section*{Instructions}
@@ -26,7 +26,7 @@ Due Wednesday, March 16, 10:00 AM (Before Class) \\
 
 Your task in this problem set is to combine two datasets in order to observe how many endorsements each candidate received using only \texttt{dplyr} functions. Use the same Presidential primary polls that were used for the in class worksheets on February 28 and March 2.
 
-```{r eval=FALSE}
+```{r}
 # Change eval=FALSE in the code block. Install packages as appropriate.
 #install.packages("fivethirtyeight")
 library(fivethirtyeight)
@@ -35,6 +35,99 @@ library(tidyverse)
 url <- 'https://jmontgomery.github.io/PDS/Datasets/president_primary_polls_feb2020.csv'
 polls <- read_csv(url)
 Endorsements <- endorsements_2020 # from the fiverthirtyeight package
+
+Endorsements <- rename(Endorsements, candidate_name = endorsee)
+Endorsements <- as_tibble(Endorsements)
+
+polls <- polls %>% 
+ filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", "Pete Buttigieg")) %>% 
+  select(candidate_name, sample_size, start_date, party, pct)
+
+#Use summarise to get a list of all candidate names in Endorsements
+#Use distinct to only return unique values
+Endorsements %>% 
+  distinct(candidate_name) %>% 
+  summarise(candidate_name)
+
+
+#polls uses:
+#Amy Klobuchar
+#Bernard Sanders
+#Elizabeth Warren
+#Joseph R. Biden Jr.
+#Michael Bloomberg
+#Pete Buttigieg
+
+#Endorsements uses:
+#Joe Biden
+#Bernie Sanders
+#Amy Klobuchar
+#Elizabeth Warren
+#Pete Buttigieg
+#Michael Bloomberg is missing
+
+#Match names in polls to be those in Endorsements
+#Amy Klobuchar, Elizabeth Warrent, and Pete Buttigieg already match
+#Replace Bernard Sanders in polls to be Bernie Sanders
+#Use mutate function
+polls <- polls %>% 
+  mutate(candidate_name = replace(candidate_name, candidate_name == "Bernard Sanders", "Bernie Sanders")) 
+#Replace Joseph R. Biden Jr. in polls to be Joe Biden
+#Use mutate function
+polls <- polls %>% 
+  mutate(candidate_name = replace(candidate_name, candidate_name == "Joseph R. Biden Jr.", "Joe Biden")) 
+
+#Combine the two datasets
+#Use inner_join to combine all matching rows, according to candidate name, and drop rows that do not match
+#Create a new tibble for this combo set
+newPoll <- polls %>% 
+  inner_join(Endorsements, by = "candidate_name")
+
+#Verify there are only 5 candidate names, and that they are the correct names
+newPoll %>% 
+  distinct(candidate_name) %>% 
+  summarise(candidate_name)
+
+#Create an new tibble
+#Columns will be candidate_name and number of endorsements (count of number of distinct endorers), called nendorse
+groupednewPoll <- newPoll %>% 
+  group_by(candidate_name) %>% 
+    summarise(nendorse = n_distinct(endorser))
+
+#Create a plot called c
+#Plot groupednewPoll data
+#Candidate name on x-axis
+#Number of endorsements on y-axis
+p <- ggplot(groupednewPoll , aes(x = candidate_name, y = nendorse)) +
+             #Use geom shape columns
+              geom_col()
+#Print plot p
+p
+
+#Add the dark theme to p
+p + theme_dark()
+
+#Customize plot p
+#load a new color palatte
+#install.packages("viridis")
+library(viridis)
+#Use plot p
+p <- p +
+  #Add in column labels, to show the number of endorsements on top of each column
+  geom_text(aes(label = nendorse, vjust = -0.2))+
+  #Color each column, using the viridis color palette (5 colors from the inferno option)
+  geom_col(aes(fill = inferno(5))) +
+  #Change x-axis label to "Candidates"
+  xlab("Candidates") +
+  #Change y-axis label to "Number of Endorsements"
+  ylab("Number of Endorsements") +
+  #Remove color legend
+  guides(fill = FALSE)
+#Print new plot p
+p
+
+```
+
 ```
 
 First, create two new objects \texttt{polls} and \texttt{Endorsements}. Then complete the following.
