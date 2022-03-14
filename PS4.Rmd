@@ -4,7 +4,7 @@ author: "Kimberly Acquilano"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, tidy=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -170,3 +170,32 @@ tweets <- read_csv(trump_tweets_url)
   \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.\item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
   \item Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
 \end{itemize}
+
+
+```{r}
+#load lubridate package
+library(lubridate)
+#Extract date and create new variable,
+#Use created_at, which is originally written as month/date/year
+tweets$date <- as.Date(tweets$created_at, "%m/%d/%y")
+
+#Extract time and create new variable, starting at fifth to last character and ending at last character of created_at
+tweets$times <- str_sub(tweets$created_at, start = -5, end = -1)
+#Turn times into time of day, with hours and minutes
+tweets$times <- hm(tweets$times)
+
+#get range of dates
+range(tweets$date)
+```
+Range of dates are: 01-01-2020 to 12-31-2020
+
+
+```{r}
+
+
+
+```
+
+
+
+
