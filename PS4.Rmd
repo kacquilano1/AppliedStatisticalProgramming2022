@@ -191,10 +191,52 @@ Range of dates are: 01-01-2020 to 12-31-2020
 
 
 ```{r}
+#create a new dataframe, a subset of tweets
+#include only tweets, no retweets
+tweets_only <- tweets[tweets$is_retweet == FALSE,]
+
+#reorder the dataframe according to retweet_count, with highest at the top, put NAs at the end
+tweets_only$retweet_count <- sort(tweets_only$retweet_count, decreasing = TRUE, na.last = TRUE)
+#save top 5 tweets, the 5 tweets with highest retweet count
+most_retweets <- head(tweets_only$text, 5)
+
+#reorder the dataframe according to favorite_count, with the highest at the top, put NAs at the end
+tweets_only$favorite_count <- sort(tweets_only$favorite_count, decreasing = TRUE, na.last = TRUE)
+#save top 5 tweets, the 5 tweets with the most favorites
+mostpop <- head(tweets_only$text, 5)
+
+#check the two objects, most_retweets and mostpop
+#they are the same
+most_retweets
+mostpop
+```
+
+```{r}
+#install.packages("tm")
+library(tm)
+
+#Create a volitile corpus of all of the tweets in the tweets_only datatframe
+Corpus <- VCorpus(VectorSource((tweets_only$text)))
+
+#remove all the whitespace from the tweets
+TweetCorpus <- tm_map(Corpus, stripWhitespace)
+
+#remove numbers
+TweetCorpus <- tm_map(TweetCorpus, removeNumbers)
+
+#remove punctuation
+TweetCorpus <- tm_map(TweetCorpus, removePunctuation)
+
+#Convert everything to lower case
+TweetCorpus <- tm_map(TweetCorpus, content_transformer(tolower))
+
+#remove stopwords, such as the, a, it.
+TweetCorpus <- tm_map(TweetCorpus, removeWords, stopwords("english"))
 
 
 
 ```
+
 
 
 
