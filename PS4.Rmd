@@ -247,15 +247,17 @@ TDMTweets <- sort(rowSums(TDMTweets), decreasing = TRUE)
 #5. create a dataframe with the frequency count of each word
 TDMTweets <- data.frame(word = names(TDMTweets), freq = TDMTweets)
 #6. Create word-cloud
+#create pdf for word-cloud.
+pdf(file = ".pdf")
 #install.packages("pals") for color palatte
 library(pals)
 #use words that occur at least 3 times
 #word-cloud will have 50 most frequent words
 #display in a random order
 #Have 25% of the words rotated 90 degrees
-Tweet_wordcloud <- wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
+wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
 #save the word-cloud to the repository
-save.image()
+dev.off()
 
 #Create a document term matrix
 DTM <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
