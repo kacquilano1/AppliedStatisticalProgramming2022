@@ -263,7 +263,7 @@ DTM <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
 DTM %>% 
   #find terms with lower frequency bound of .8
   findFreqTerms(lowfreq = .8) %>% 
-  sort(, decreasing = TRUE) %>% 
+  sort( decreasing = TRUE) %>% 
   head(50)
 
 ```
