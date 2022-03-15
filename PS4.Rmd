@@ -234,9 +234,42 @@ TweetCorpus <- tm_map(TweetCorpus, content_transformer(tolower))
 TweetCorpus <- tm_map(TweetCorpus, removeWords, stopwords("english"))
 
 
+#To create a word-cloud:
+#1. create a term document matrix
+TDMTweets <- TermDocumentMatrix(TweetCorpus)
+#2. remove sparse terms, because the object is too big otherwise
+#the closer to 1, the more sparse the words are that are being removed
+TDMTweets <- removeSparseTerms(TDMTweets, .99)
+#3. turn it into a matrix
+TDMTweets <- as.matrix((TDMTweets))
+#4. sort the rows to be decreasing
+TDMTweets <- sort(rowSums(TDMTweets), decreasing = TRUE)
+#5. create a dataframe with the frequency count of each word
+TDMTweets <- data.frame(word = names(TDMTweets), freq = TDMTweets)
+#6. Create word-cloud
+#install.packages("pals") for color palatte
+library(pals)
+#use words that occur at least 3 times
+#word-cloud will have 50 most frequent words
+#display in a random order
+#Have 25% of the words rotated 90 degrees
+Tweet_wordcloud <- wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
+#save the word-cloud to the repository
+save.image()
+
+#Create a document term matrix
+DTM <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
+#obtain 50 terms with highest tf.idf with lower frequency bound of .8
+DTM %>% 
+  #find terms with lower frequency bound of .8
+  findFreqTerms(lowfreq = .8) %>% 
+  sort(, decreasing = TRUE) %>% 
+  head(50)
 
 ```
-
+  \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.
+  \item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
+  \item Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
 
 
 
