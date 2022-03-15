@@ -248,26 +248,33 @@ TDMTweets <- sort(rowSums(TDMTweets), decreasing = TRUE)
 TDMTweets <- data.frame(word = names(TDMTweets), freq = TDMTweets)
 #6. Create word-cloud
 #create pdf for word-cloud.
-pdf(file = ".pdf")
+pdf(file = "./wordcloud.pdf")
 #install.packages("pals") for color palatte
 library(pals)
 #use words that occur at least 3 times
 #word-cloud will have 50 most frequent words
 #display in a random order
 #Have 25% of the words rotated 90 degrees
-wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
+wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
 #save the word-cloud to the repository
 dev.off()
 
 #Create a document term matrix
-DTM <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
+DTM_tfidf <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
 #obtain 50 terms with highest tf.idf with lower frequency bound of .8
-DTM %>% 
-  #find terms with lower frequency bound of .8
-  findFreqTerms(lowfreq = .8) %>% 
-  sort( decreasing = TRUE) %>% 
-  head(50)
 
+#create a dictionary of terms with lower frequency bound of .8 from the tf.idf DTM
+freq_words <- findFreqTerms(DTM_tfidf, lowfreq = .8)
+#use the dictionary above to pare down the DTM
+DTM_freq_words <- DocumentTermMatrix(TweetCorpus, list(dictionary = freq_words))
+#find the 50 most frequent words
+DTM_freq_words %>% 
+  as.matrix %>% 
+  sort(rowSums, decreasing = TRUE) %>% 
+  head(50)
+  
+
+  
 ```
   \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.
   \item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
