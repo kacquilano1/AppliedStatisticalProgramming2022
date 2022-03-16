@@ -173,8 +173,7 @@ tweets <- read_csv(trump_tweets_url)
 
 
 ```{r}
-#load lubridate package
-library(lubridate)
+
 #Extract date and create new variable,
 #Use created_at, which is originally written as month/date/year
 tweets$date <- as.Date(tweets$created_at, "%m/%d/%y")
@@ -247,16 +246,21 @@ TDMTweets <- sort(rowSums(TDMTweets), decreasing = TRUE)
 #5. create a dataframe with the frequency count of each word
 TDMTweets <- data.frame(word = names(TDMTweets), freq = TDMTweets)
 #6. Create word-cloud
-#create pdf for word-cloud.
+  #a. create pdf for word-cloud, saved to the repository.
 pdf(file = "./wordcloud.pdf")
-#install.packages("pals") for color palatte
+  #b. install.packages("pals") for color palette
 library(pals)
-#use words that occur at least 3 times
-#word-cloud will have 50 most frequent words
-#display in a random order
-#Have 25% of the words rotated 90 degrees
-wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, rot.per = .25, colors = kovesi.rainbow(50))
-#save the word-cloud to the repository
+  #c. select 50 random colors to be used for word cloud
+cloud_colors <- kovesi.rainbow(50)
+  #d. wordcloud function
+    #use words that occur at least 3 times
+    #word-cloud will have 50 most frequent words
+    #display in a random order
+    #set random.color to FALSE, so that colors will not be assigned by frequency
+    #Have 25% of the words rotated 90 degrees
+    #use the colors created above
+wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, ordered.colors = FALSE, rot.per = .25, colors = cloud_colors)
+  #e.end of pdf
 dev.off()
 
 #Create a document term matrix
@@ -269,10 +273,18 @@ freq_words <- findFreqTerms(DTM_tfidf, lowfreq = .8)
 DTM_freq_words <- DocumentTermMatrix(TweetCorpus, list(dictionary = freq_words))
 #find the 50 most frequent words
 DTM_freq_words %>% 
+  as.matrix
+    mutate(total = sum())
   as.matrix %>% 
-  sort(rowSums, decreasing = TRUE) %>% 
+  sort(colSums, decreasing = TRUE) %>% 
   head(50)
   
+TDM_tfidf <- TermDocumentMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
+freq_words <- findFreqTerms(TDM_tfidf, lowfreq = .8)
+#use the dictionary above to pare down the DTM
+TDM_freq_words <- TermDocumentMatrix(TweetCorpus, list(dictionary = freq_words))
+
+TDM_tfidf2 <- remove(TDM_tfidf[!(rownames %in% freq_words)]) 
 
   
 ```
