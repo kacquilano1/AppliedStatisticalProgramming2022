@@ -5,7 +5,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE, tidy=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, tidy = TRUE)
 ```
 
 \begin{center}
@@ -52,15 +52,25 @@ url <- 'https://jmontgomery.github.io/PDS/Datasets/president_primary_polls_feb20
 polls <- read_csv(url)
 Endorsements <- endorsements_2020 # from the fiverthirtyeight package
 
+#Alter the Endorsements file
+#Change the column name from endorsee to candidate_name
 Endorsements <- rename(Endorsements, candidate_name = endorsee)
+#Turn it into a tibble to be able to manipulate data
 Endorsements <- as_tibble(Endorsements)
 
+#Alter the polls file, by paring it down
+  #filter the dataset to only be data for the following candidates
+  #select only the necessary columns: candidate_name, sample_size, start_date, party, and pct
 polls <- polls %>% 
- filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", "Pete Buttigieg")) %>% 
-  select(candidate_name, sample_size, start_date, party, pct)
+   filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", "Pete Buttigieg")) %>% 
+    select(candidate_name, sample_size, start_date, party, pct)
 
-#Use summarise to get a list of all candidate names in Endorsements
-#Use distinct to only return unique values
+
+#Check the Endorsements file to see what candidates are used in the dataset
+#The purpose to match candidate information with those in the polls dataset
+  #Use distinct to only return unique values of candidate_names
+  #In other words, return only each candidate_name, I don't need every time each anme occurs
+  #Use summarise to get that list of names
 Endorsements %>% 
   distinct(candidate_name) %>% 
   summarise(candidate_name)
@@ -82,22 +92,23 @@ Endorsements %>%
 #Pete Buttigieg
 #Michael Bloomberg is missing
 
-#Match names in polls to be those in Endorsements
+#Match names, as they are written, in polls to be those in Endorsements
 #Amy Klobuchar, Elizabeth Warrent, and Pete Buttigieg already match
-#Replace Bernard Sanders in polls to be Bernie Sanders
-#Use mutate function
+#Alter the polls dataset so that the Bernie Sanders name matches that in Endorsements
+  #Use mutate function. Replace Bernard Sanders in polls to be Bernie Sanders
 polls <- polls %>% 
   mutate(candidate_name = replace(candidate_name, candidate_name == "Bernard Sanders", "Bernie Sanders")) 
-#Replace Joseph R. Biden Jr. in polls to be Joe Biden
-#Use mutate function
+
+#Alter the polls dataset again, so that Joe Biden's name matches what is in Endorsements
+  #Use mutate function. Replace Joseph R. Biden Jr. in polls to be Joe Biden
 polls <- polls %>% 
-  mutate(candidate_name = replace(candidate_name, candidate_name == "Joseph R. Biden Jr.", "Joe Biden")) 
+    mutate(candidate_name = replace(candidate_name, candidate_name == "Joseph R. Biden Jr.", "Joe Biden")) 
 
 #Combine the two datasets
-#Use inner_join to combine all matching rows, according to candidate name, and drop rows that do not match
 #Create a new tibble for this combo set
+  #Use inner_join to combine all matching rows, according to candidate name, and drop rows that do not match
 newPoll <- polls %>% 
-  inner_join(Endorsements, by = "candidate_name")
+    inner_join(Endorsements, by = "candidate_name")
 
 #Verify there are only 5 candidate names, and that they are the correct names
 newPoll %>% 
@@ -105,18 +116,22 @@ newPoll %>%
   summarise(candidate_name)
 
 #Create an new tibble
-#Columns will be candidate_name and number of endorsements (count of number of distinct endorers), called nendorse
+#Thhis new tibble will only have each candidate's name and their total number of endorsements
+  #Group the data by candidate's name
+  #Use summarise to create the new column nendorse, which is the number of endorsements (count of number of distinct endorers)
 groupednewPoll <- newPoll %>% 
-  group_by(candidate_name) %>% 
-    summarise(nendorse = n_distinct(endorser))
+    group_by(candidate_name) %>% 
+      summarise(nendorse = n_distinct(endorser))
 
 #Create a plot called c
+library(ggplot2)
 #Plot groupednewPoll data
 #Candidate name on x-axis
 #Number of endorsements on y-axis
+#Use geom shape columns
 p <- ggplot(groupednewPoll , aes(x = candidate_name, y = nendorse)) +
-             #Use geom shape columns
-              geom_col()
+            geom_col()
+
 #Print plot p
 p
 
@@ -128,16 +143,16 @@ p + theme_dark()
 #install.packages("viridis")
 library(viridis)
 #Use plot p
-p <- p +
   #Add in column labels, to show the number of endorsements on top of each column
-  geom_text(aes(label = nendorse, vjust = -0.2))+
   #Color each column, using the viridis color palette (5 colors from the inferno option)
-  geom_col(aes(fill = inferno(5))) +
   #Change x-axis label to "Candidates"
-  xlab("Candidates") +
   #Change y-axis label to "Number of Endorsements"
-  ylab("Number of Endorsements") +
   #Remove color legend
+p <- p +
+  geom_text(aes(label = nendorse, vjust = -0.2)) +
+  geom_col(aes(fill = inferno(5))) +
+  xlab("Candidates") +
+  ylab("Number of Endorsements") +
   guides(fill = FALSE)
 #Print new plot p
 p
