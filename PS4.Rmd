@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \begin{center}
 {\Large{\textbf{Problem Set 4}}} \\
 \vspace{4 bp}
-Due Wednesday, March 21, 10:00 AM (Before Class) \\
+Due Wednesday, March 23, 10:00 AM (Before Class) \\
 \end{center}
 
 \section*{Instructions}
@@ -144,12 +144,15 @@ p
 
 ```
 
-
-\section*{Text-as-Data with \texttt{tidyverse}}
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
+Text-as-Data with \texttt{tidyverse}
 
 For this question you will be analyzing Tweets from President Trump for various characteristics. Load in the following packages and data:
 
-```{r eval=FALSE}
+```{r}
 # Change eval=FALSE in the code block. Install packages as appropriate.
 library(tidyverse)
 #install.packages('tm')
@@ -162,16 +165,9 @@ trump_tweets_url <- 'https://politicaldatascience.com/PDS/Datasets/trump_tweets.
 tweets <- read_csv(trump_tweets_url)
 ```
 
-\begin{itemize}
-  \item First separate the \texttt{created\_at} variable into two new variables where the date and the time are in separate columns. After you do that, then report the range of dates that is in this dataset.
-  \item Using \texttt{dplyr} subset the data to only include original tweets (remove retweents) and show the text of the President's \textbf{top 5} most popular and most retweeted tweets. (Hint: The \texttt{match} function can help you find the index once you identify the largest values.) 
-  \item Create a \textit{corpus} of the tweet content and put this into the object \texttt{Corpus} using the \texttt{tm} (text mining) package. (Hint: Do the assigned readings.)
-  \item Remove extraneous whitespace, remove numbers and punctuation, convert everything to lower case and remove 'stop words' that have little substantive meaning (the, a, it).
-  \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.\item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
-  \item Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
-\end{itemize}
 
-
+  
+First separate the \texttt{created\_at} variable into two new variables where the date and the time are in separate columns. After you do that, then report the range of dates that is in this dataset.
 ```{r}
 
 #Extract date and create new variable,
@@ -187,8 +183,11 @@ tweets$times <- hm(tweets$times)
 range(tweets$date)
 ```
 Range of dates are: 01-01-2020 to 12-31-2020
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
 
-
+Using \texttt{dplyr} subset the data to only include original tweets (remove retweents) and show the text of the President's \textbf{top 5} most popular and most retweeted tweets. (Hint: The \texttt{match} function can help you find the index once you identify the largest values.) 
 ```{r}
 #create a new dataframe, a subset of tweets
 #include only tweets, no retweets
@@ -209,14 +208,25 @@ mostpop <- head(tweets_only$text, 5)
 most_retweets
 mostpop
 ```
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
 
+Create a \textit{corpus} of the tweet content and put this into the object \texttt{Corpus} using the \texttt{tm} (text mining) package. (Hint: Do the assigned readings.)
 ```{r}
 #install.packages("tm")
 library(tm)
 
 #Create a volitile corpus of all of the tweets in the tweets_only datatframe
 Corpus <- VCorpus(VectorSource((tweets_only$text)))
+```
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
+Remove extraneous whitespace, remove numbers and punctuation, convert everything to lower case and remove 'stop words' that have little substantive meaning (the, a, it).
 
+
+```{r}
 #remove all the whitespace from the tweets
 TweetCorpus <- tm_map(Corpus, stripWhitespace)
 
@@ -231,9 +241,15 @@ TweetCorpus <- tm_map(TweetCorpus, content_transformer(tolower))
 
 #remove stopwords, such as the, a, it.
 TweetCorpus <- tm_map(TweetCorpus, removeWords, stopwords("english"))
+```
 
-
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
+Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.
+```{r}
 #To create a word-cloud:
+##Note: followed steps laid out by https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a for manipulating TDM and creating word-cloud. Followed their code for this task.
 #1. create a term document matrix
 TDMTweets <- TermDocumentMatrix(TweetCorpus)
 #2. remove sparse terms, because the object is too big otherwise
@@ -248,10 +264,10 @@ TDMTweets <- data.frame(word = names(TDMTweets), freq = TDMTweets)
 #6. Create word-cloud
   #a. create pdf for word-cloud, saved to the repository.
 pdf(file = "./wordcloud.pdf")
-  #b. install.packages("pals") for color palette
+  #b. set seed for replicability
+set.seed(1234)
+  #c. install.packages("pals") for color palette
 library(pals)
-  #c. select 50 random colors to be used for word cloud
-cloud_colors <- kovesi.rainbow(50)
   #d. wordcloud function
     #use words that occur at least 3 times
     #word-cloud will have 50 most frequent words
@@ -259,39 +275,76 @@ cloud_colors <- kovesi.rainbow(50)
     #set random.color to FALSE, so that colors will not be assigned by frequency
     #Have 25% of the words rotated 90 degrees
     #use the colors created above
-wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = TRUE, ordered.colors = FALSE, rot.per = .25, colors = cloud_colors)
-  #e.end of pdf
+wordcloud(words = TDMTweets$word, freq = TDMTweets$freq, min.freq = 3, max.words = 50, random.order = TRUE, random.color = FALSE, ordered.colors = FALSE, rot.per = .25, colors = kovesi.cyclic_mygbm_30_95_c78(length(TDMTweets$word)))
+  #e. add a title, using mtext. Options side=3 is to place the text at the top of the page, cex=2 is the font size
+mtext("Top 50 words tweeted by Trump in 2020", side = 3, cex = 2)
+  #f. add a note to describe what the colors and words sizes mean. Use "\n" in text to move to a new line. Option side=1 places the text at the bottom on the page, cex=.5 is the font size.
+mtext("Note: The colors do not add any information; \n they are only for aesthetic purposes.\n Text size indicates frequency of word used,\n with larger text meaning more frequent", side = 1, cex = .5)
+  #e. end of pdf
 dev.off()
-
-#Create a document term matrix
-DTM_tfidf <- DocumentTermMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
-#obtain 50 terms with highest tf.idf with lower frequency bound of .8
-
-#create a dictionary of terms with lower frequency bound of .8 from the tf.idf DTM
-freq_words <- findFreqTerms(DTM_tfidf, lowfreq = .8)
-#use the dictionary above to pare down the DTM
-DTM_freq_words <- DocumentTermMatrix(TweetCorpus, list(dictionary = freq_words))
-#find the 50 most frequent words
-DTM_freq_words %>% 
-  as.matrix
-    mutate(total = sum())
-  as.matrix %>% 
-  sort(colSums, decreasing = TRUE) %>% 
-  head(50)
-  
-TDM_tfidf <- TermDocumentMatrix(TweetCorpus, control = list(weighting = weightTfIdf))
-freq_words <- findFreqTerms(TDM_tfidf, lowfreq = .8)
-#use the dictionary above to pare down the DTM
-TDM_freq_words <- TermDocumentMatrix(TweetCorpus, list(dictionary = freq_words))
-
-TDM_tfidf2 <- remove(TDM_tfidf[!(rownames %in% freq_words)]) 
-
-  
 ```
-  \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.
-  \item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
-  \item Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
 
 
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
+Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
+
+```{r}
+#subset tweets by only those that have been retweeted at least 1,000 times
+retweeted <- tweets_only %>% 
+  filter(retweet_count >= 1000)
+
+#Turn this document into a corpus
+RetweetCorpus <- VCorpus(VectorSource((retweeted$text)))
+#Clean this corpus just like the one before
+#remove all the whitespace from the tweets
+ReweetCorpus <- tm_map(RetweetCorpus, stripWhitespace)
+
+#remove numbers
+RetweetCorpus <- tm_map(RetweetCorpus, removeNumbers)
+
+#remove punctuation
+RetweetCorpus <- tm_map(RetweetCorpus, removePunctuation)
+
+#Convert everything to lower case
+RetweetCorpus <- tm_map(RetweetCorpus, content_transformer(tolower))
+
+#remove stopwords, such as the, a, it.
+RetweetCorpus <- tm_map(RetweetCorpus, removeWords, stopwords("english"))
+
+#Turn RetweetCorpus into Document-Term_Matrix
+DTM_tfidf <- DocumentTermMatrix(RetweetCorpus, control = list(weighting = weightTfIdf, lowfreq = .8))
+```
+$$\\[.1in]$$
+$$--------------------------------------------------------$$
+$$\\[.1in]$$
+Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
+```{r}
+#turn the DTM into a dataframe using tidy()
+#install.packages("tidytext")
+library(tidytext)
+DTM_tfidf_df <- tidy(DTM_tfidf)
+#The tidy function turned my DTM into a data frame.
+#Now the columns are: 1. the document the observation came from; 2. the term, which is word used in the original tweet (this is really the observation for practical purposes); and 3. the observation's count, which is the td.idf score.
+
+#Get the 50 terms with the highest td.idf scores
+#1. start with renaming the column name from count to tf_idf
+DTM_tfidf_df2 <- DTM_tfidf_df %>% 
+  rename("tf_idf" = "count") %>% 
+  #2. then reorder the tf_idf column, so that its value is decreasing
+  arrange(desc(tf_idf))%>% 
+  #3 now remove all words that have http in them
+  filter(!(str_detect(term, ".[(http)]."))) %>% 
+  #4. keept only the distinct terms, in other words remove duplicate words
+  ###Be sure to set .keep_all to TRUE to be able to keep all variables
+  distinct(term, .keep_all = TRUE) %>% 
+  #4. select only the top 50  words
+  slice_head(n = 50) 
+
+#print the top 50 terms with the highest td.idf scores
+print(DTM_tfidf_df2$term)
 
 
+```
+ 
