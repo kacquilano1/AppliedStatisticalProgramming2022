@@ -1,5 +1,6 @@
 ---
 title: "Applied Statistical Programming - Spring 2022"
+Author: "Kimberly Acquilano"
 output: pdf_document
 ---
 
@@ -32,9 +33,11 @@ Trapezoid rule is a technique for approximating the definite integral, and it fo
 T &= \frac{h}{2}(f(x_0) + 2f(x_1) + ... + 2(f_{n-1}) + f(x_n))\\
 \text{where } h &= \frac{b-a}{n} 
 \end{align*}
-\begin{figure}[h!]\centering 
-\includegraphics[width=0.6\linewidth]{trapezoidal_rule_illustration.png} 
-\end{figure}
+```{r}
+#\begin{figure}[h!]\centering 
+#\includegraphics[width=0.6\linewidth]{trapezoidal_rule_illustration.png} 
+#\end{figure}
+```
 
 
 \subsection*{Simpsons Rule}
@@ -45,9 +48,12 @@ S &= \frac{h}{3}(f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) +  ... + 4(f_{n-1}) + f(x_
 \text{where } h &= \frac{b-a}{h} 
 \end{align*}
 Image that you are drawing a parabola from the points $(a, f(a))$ to $(b, f(b))$ that also goes through the $(m, f(m))$. We can approximate the area under the parabola as being equal to $\int_a^b f(x) dx$.
-\begin{figure}[h!]\centering 
-\includegraphics[width=0.6\linewidth]{Simpsons_method_illustration.png} 
-\end{figure}
+```{r}
+#\begin{figure}[h!]\centering 
+#\includegraphics[width=0.6\linewidth]{Simpsons_method_illustration.png} 
+#\end{figure}
+```
+
 For example, the parabola between any two points, $(u, f(u))$ and $(w, f(w))$ is drawn according to the formula (where $v=\frac{w-u}{2}$):
  \begin{align*} 
 p(x) = f(u) \frac{(x-v)(x-w)}{(u-v)(u-w)} +f(v) \frac{(x-u)(x-w)}{(v-u)(v-w)} + f(w) \frac{(x-u)(x-v)}{(w-u)(w-v)}
@@ -61,13 +67,14 @@ If we imagine carrying on that calculation many times between different points a
   S &= \frac{h}{3}(f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3)... + 4f(x_{n-1}) + f(x_n))\\
   \text{where } h=\frac{b-a}{n}\\
 \end{align*}
-\begin{figure}[h!]\centering 
-\includegraphics[width=0.6\linewidth]{simpson.png} 
-\end{figure}
+```{r}
+#\begin{figure}[h!]\centering 
+#\includegraphics[width=0.6\linewidth]{simpson.png} 
+#\end{figure}
+```
 
 
-
-
+\newpage
 \section*{Create an S4 Package}
 \begin{enumerate}
 \item To prepare for your midterm, you will use \texttt{devtools} to create an S4 R package named \texttt{integrateIt}.
