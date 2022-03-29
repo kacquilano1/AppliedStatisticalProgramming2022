@@ -1,9 +1,18 @@
-#Create a function for the Trapezoid Rule
-#Function will take in a starting and ending values, "a" and "b"
-#It will also take in "d" number of divisions
-#And the function "f" that will be integrated
-#Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
-Trapezoid <- function(start = a, end = b, divisions = d, f) {
+#' Numerical Integration Using the Trapezoid Rule
+#'
+#' @param a The start value
+#' @param b The end value
+#' @param d The number of divisions
+#' @param f The function that will be used for integration
+#'
+#' @return A numerical value
+#' @export
+#'
+#' @examples
+#' f <- function(x) {sin(x)}
+#' Trapezoid(a = 0, b = 10, d = 5, f)
+#'
+Trapezoid <- function(a, b, d, f) {
   #Define our h:
    h <- (b - a) / d
    #n is a vector of the number of divisions between a and b
@@ -14,6 +23,7 @@ Trapezoid <- function(start = a, end = b, divisions = d, f) {
   #Trapezoid function
   #(h/2) * (the function of a + 2 * f(every value of x_n) + f(b)
   #This will only multiply the inner values by two, leaving the end points as they are
+  #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return the value from the Trapezoid Rule
   return(Trap)

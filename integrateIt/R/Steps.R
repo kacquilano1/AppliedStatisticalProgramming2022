@@ -1,0 +1,7 @@
+use_r("Trapezoid")
+use_r("Simpson")
+load_all()
+check()
+use_mit_license()
+document()
+check()
