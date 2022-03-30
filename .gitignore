@@ -275,3 +275,7 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 .Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
