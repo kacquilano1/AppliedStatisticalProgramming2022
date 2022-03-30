@@ -13,6 +13,8 @@
 #' Trapezoid(a = 0, b = 10, d = 5, f)
 #'
 Trapezoid <- function(a, b, d, f) {
+  #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
+
   #Define our h:
   h <- (b - a) / d
   #n is a vector of the number of divisions between a and b
@@ -23,7 +25,6 @@ Trapezoid <- function(a, b, d, f) {
   #Trapezoid function
   #(h/2) * (the function of a + 2 * f(every value of x_n) + f(b)
   #This will only multiply the inner values by two, leaving the end points as they are
-  #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return the value from the Trapezoid Rule
   return(Trap)

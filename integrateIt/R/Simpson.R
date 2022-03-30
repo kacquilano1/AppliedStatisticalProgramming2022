@@ -13,11 +13,14 @@
 #' Simpson(a = 0, b = 10, d = 5, f)
 #'
 Simpson <- function(a, b, d, f) {
+  #Based on Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
+
   #Define our h:
   h <- (b - a) / d
   #n is a vector of the number of divisions between a and b
   n <- 1 : (d - 1)
   #Create a vector of  odd n values
+  #See: https://stackoverflow.com/questions/55080927/how-can-i-write-a-function-that-returns-odd-numbers-only-from-a-list-of-integers
   #This is selecting the odd elements from within n through subsetting
   n_odd <- n[ (n %% 2) != 0]
   #Create a vector of even n values
@@ -28,7 +31,6 @@ Simpson <- function(a, b, d, f) {
   x_n_odd <- a + (n_odd * h)
   x_n_even <- a + (n_even *h)
   #Simpson function
-  #Based on Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   #(h/3) * (the function of a + 4 * f(every value of odd value of n) + 2*f(every even value of n) + f(b)
   #This will only multiply the inner values by four and two, leaving the end points as they are: f(x_0) + 4f(x_1) + 2f(x_2) + ...2f(x_d-1) + f(x_d)
   #In other words if there are 5 divisions from the numbers 0 to 10 the functions would be f(0) + 4f(2) + 2f(4) + 4f(6) + 2f(8) + f(10)
