@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
-#' Simpson(a = 0, b = 10, d = 5, f)
+#' simpson_fun(a = 0, b = 10, d = 5, f)
 #'
-Simpson <- function(a, b, d, f) {
+simpson_fun <- function(a, b, d, f) {
   #Based on Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
 
   #Define our h:

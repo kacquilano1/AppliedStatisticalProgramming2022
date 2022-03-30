@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
-#' Trapezoid(a = 0, b = 10, d = 5, f)
+#' trapezoid_fun(a = 0, b = 10, d = 5, f)
 #'
-Trapezoid <- function(a, b, d, f) {
+trapezoid_fun <- function(a, b, d, f) {
   #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
 
   #Define our h:

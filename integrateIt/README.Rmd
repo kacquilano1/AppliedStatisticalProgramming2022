@@ -36,8 +36,8 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(integrateIt)
 f <- function(x) {sin(x)}
-Simpson(a = 0, b = 10, d = 5, f)
-Trapezoid(a = 0, b = 10, d = 5, f)
+simpson_fun(a = 0, b = 10, d = 5, f)
+trapezoid_fun(a = 0, b = 10, d = 5, f)
 ```
 
 The functions will output a numerical estimation for the definite integral approximations.
