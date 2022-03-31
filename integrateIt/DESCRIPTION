@@ -5,6 +5,7 @@ Authors@R:
   person("Kimberly", "Acquilano", , "k.a.acquilano@wustl.edu", role = c("aut", "cre"),
          comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package allows users to perform integration using the Trapezoid Rule and/or the Simpson Rule.
+Imports: methods
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -14,5 +15,6 @@ Suggests:
 Config/testthat/edition: 3
 Collate: 
     'Trapezoid.R'
+    'integrateIt-package.R'
     'simpson_fun.R'
     'trapezoid_fun.R'

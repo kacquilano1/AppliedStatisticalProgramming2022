@@ -3,7 +3,9 @@
 \docType{class}
 \name{Trapezoid-class}
 \alias{Trapezoid-class}
-\alias{initialize,integrateIt-method,print-method}
+\alias{initialize,Trapezoid-method}
+\alias{integrateIt,Trapezoid-method}
+\alias{show,Trapezoid-method}
 \alias{integrateIt}
 \title{An approximated value object from Trapezoid Rule}
 \usage{

@@ -12,10 +12,10 @@
 #' \item \code{f} the function to be integrated
 #' }
 #'
+#' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,integrateIt-method,print-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method show,Trapezoid-method
 #' @rdname Trapezoid
-#' @include Trapezoid.R
 #' @export
 setClass(Class="Trapezoid",
          representation = representation(
@@ -37,22 +37,22 @@ setMethod("initialize", "Trapezoid",
           function(.Object, ...){
             value=callNextMethod()
             return(value)
-          }
-)
+          })
 
 #' @rdname Trapezoid
 #' @export
 setGeneric("integrateIt",
            function(object="Trapezoid")
-             standardGeneric("integrateIt")
+             standardGeneric("integrateIt"),
+           signature = "object"
 )
 
 #' @export
 setMethod("integrateIt", "Trapezoid",
           function(object) {
-            return(list("Trapezoid", c(object@w, object@y), object@result))
-          }
-)
+            output <- list(Rule = "Trapezoid", Values = c(object@w, object@y), Result = object@result)
+            return(output)
+})
 
 #' @export
 setMethod("show", "Trapezoid", function(object) {
