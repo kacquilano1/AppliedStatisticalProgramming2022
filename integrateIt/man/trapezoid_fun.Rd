@@ -26,3 +26,6 @@ f <- function(x) {sin(x)}
 trapezoid_fun(a = 0, b = 10, d = 5, f)
 
 }
+\seealso{
+simpson_fun
+}

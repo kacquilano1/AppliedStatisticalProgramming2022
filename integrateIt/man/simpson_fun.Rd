@@ -24,5 +24,7 @@ Numerical Integration Using the Simpson Rule
 \examples{
 f <- function(x) {sin(x)}
 simpson_fun(a = 0, b = 10, d = 5, f)
-
+}
+\seealso{
+trapezoid_fun
 }

@@ -15,19 +15,20 @@
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
 #' @aliases Trapezoid-class initialize,integrateIt-method,print-method
 #' @rdname Trapezoid
+#' @include Trapezoid.R
 #' @export
 setClass(Class="Trapezoid",
          representation = representation(
            result = "numeric",
            ab = "numeric",
            w = "numeric",
-           y = "numeric",
+           y = "numeric"
            ),
          prototype = prototype(
            result = c(),
            ab = c(),
            w = c(),
-           y = c(),
+           y = c()
            )
 )
 
@@ -42,23 +43,24 @@ setMethod("initialize", "Trapezoid",
 #' @rdname Trapezoid
 #' @export
 setGeneric("integrateIt",
-           function(object="Trapezoid")  {
+           function(object="Trapezoid")
              standardGeneric("integrateIt")
-           }
 )
 
 #' @export
 setMethod("integrateIt", "Trapezoid",
-          function(rule = object, ab, w, y){
-            return(list = object, c(object@w, object@y), object@result)
+          function(object) {
+            return(list("Trapezoid", c(object@w, object@y), object@result))
           }
 )
 
 #' @export
-setMethod("print", "Trapezoid",
-          function(object) {
-            return(object@result)
-          })
+setMethod("show", "Trapezoid", function(object) {
+cat(is(object)[[1]], "\n",
+    "  Result: ", object@result, "\n",
+    sep = ""
+)
+})
 
 #' @export
 setValidity("Trapezoid", function(object) {

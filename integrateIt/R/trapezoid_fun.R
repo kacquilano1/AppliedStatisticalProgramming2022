@@ -6,12 +6,15 @@
 #' @param f The function that will be used for integration
 #'
 #' @return A numerical value
-#' @export
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
 #' trapezoid_fun(a = 0, b = 10, d = 5, f)
 #'
+#' @seealso simpson_fun
+#' @rdname trapezoid_fun
+#' @include trapezoid_fun.R
+#' @export
 trapezoid_fun <- function(a, b, d, f) {
   #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   #Create a vector of start and end values, which will be used for the function's output

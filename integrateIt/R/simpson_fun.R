@@ -6,12 +6,15 @@
 #' @param f The function that will be used for integration
 #'
 #' @return A numerical value
-#' @export
+#
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
 #' simpson_fun(a = 0, b = 10, d = 5, f)
-#'
+#' @seealso trapezoid_fun
+#' @rdname simpson_fun
+#' @include simpson_fun.R
+#' @export
 simpson_fun <- function(a, b, d, f) {
   #Based on Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   #Create a vector of start and end values, which will be used for the function's output
@@ -20,8 +23,7 @@ simpson_fun <- function(a, b, d, f) {
   h <- (b - a) / d
   #n is a vector of the number of divisions between a and b
   n <- 1 : (d - 1)
-  #Create a vector w, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
-  w = c(a, x_n, b)
+
     #Create a vector of  odd n values
   #See: https://stackoverflow.com/questions/55080927/how-can-i-write-a-function-that-returns-odd-numbers-only-from-a-list-of-integers
   #This is selecting the odd elements from within n through subsetting
@@ -33,6 +35,8 @@ simpson_fun <- function(a, b, d, f) {
   #These vectors will allow for only the inner odd values to be multiplied by 4, and the inner even values to be multiplied by 2
   x_n_odd <- a + (n_odd * h)
   x_n_even <- a + (n_even *h)
+  #Create a vector w, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
+  w = c(a, x_n_odd, x_n_even, b)
   #Create a vector y, which will be a vector containing all of the values evaluated by the function, which will be a part of the output
   y = c(f(a), 4*f(x_n_odd), 2*f(x_n_even), f(b))
   #Simpson function
