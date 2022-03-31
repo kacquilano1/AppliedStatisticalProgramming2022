@@ -25,10 +25,10 @@ setClass(Class="Trapezoid",
            y = "numeric"
            ),
          prototype = prototype(
-           result = c(),
-           ab = c(),
-           w = c(),
-           y = c()
+           result = NA_real_,
+           ab = NA_real_,
+           w = NA_real_,
+           y = NA_real_
            )
 )
 
