@@ -59,3 +59,16 @@ setMethod("print", "Trapezoid",
           function(object) {
             return(object@result)
           })
+
+#' @export
+setValidity("Trapezoid", function(object) {
+  if (length(object@ab) != 2) {
+    "@ab must be a vector of 2"
+  } else if (length(object@w) != length(object@y)) {
+    "@w and @y must be the same length"
+  } else if (length(object@w) >= length(object@ab)) {
+    "@w and @y have a length smaller than @ab"
+  } else {
+    TRUE
+  }
+})
