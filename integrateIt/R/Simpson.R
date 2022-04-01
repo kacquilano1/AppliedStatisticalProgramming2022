@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Simpson-class initialize,Simpson-method integratIt-generic integrateIt,Simpson-method show,Simpson-method
+#' @aliases Simpson-class initialize,Simpson-method integrateIt,Simpson-method show,Simpson-method
 #' @rdname Simpson
 #' @export
 setClass(Class="Simpson",
@@ -39,12 +39,6 @@ setMethod("initialize", "Simpson",
             return(value)
           })
 
-#' @export
-setGeneric("integrateIt",
-           function(object="Simpson")
-             standardGeneric("integrateIt"),
-           signature = "object"
-)
 
 #' @export
 setMethod("integrateIt", "Simpson",

@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,Trapezoid-method integratIt-generic integrateIt,Trapezoid-method show,Trapezoid-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method show,Trapezoid-method
 #' @rdname Trapezoid
 #' @export
 setClass(Class="Trapezoid",
