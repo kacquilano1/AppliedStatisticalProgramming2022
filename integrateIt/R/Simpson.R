@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Simpson-class initialize,Simpson-method integrateIt,Simpson-method show,Simpson-method
+#' @aliases Simpson-class initialize,Simpson-method integrateIt,Simpson-method print,Simpson-method
 #' @rdname Simpson
 #' @export
 setClass(Class="Simpson",
@@ -41,14 +41,14 @@ setMethod("initialize", "Simpson",
 
 
 #' @export
-setMethod("integrateIt", "Simpson",
-          function(object) {
+setMethod("integrateIt", signature = "Simpson",
+          definition = function(object) {
             output <- list(Rule = "Simpson", Values = c(object@w, object@y), Result = object@result)
             return(output)
           })
 
 #' @export
-setMethod("show", "Simpson", function(object) {
+setMethod("print", signature = "Simpson", definition = function(object) {
   cat(is(object)[[1]], "\n",
       "  Result: ", object@result, "\n",
       sep = ""

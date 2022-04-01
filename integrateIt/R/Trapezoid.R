@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method show,Trapezoid-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method print,Trapezoid-method
 #' @rdname Trapezoid
 #' @export
 setClass(Class="Trapezoid",
@@ -41,20 +41,19 @@ setMethod("initialize", "Trapezoid",
 
 #' @export
 setGeneric("integrateIt",
-           function(object="Trapezoid")
+           function(object)
              standardGeneric("integrateIt"),
-           signature = "object"
-)
+          )
 
 #' @export
-setMethod("integrateIt", "Trapezoid",
-          function(object) {
+setMethod("integrateIt", signiature = "Trapezoid",
+          definition = function(object) {
             output <- list(Rule = "Trapezoid", Values = c(object@w, object@y), Result = object@result)
             return(output)
 })
 
 #' @export
-setMethod("show", "Trapezoid", function(object) {
+setMethod("print", signiature = "Trapezoid", definition = function(object) {
 cat(is(object)[[1]], "\n",
     "  Result: ", object@result, "\n",
     sep = ""

@@ -1,6 +1,6 @@
 #' integrateIt
 #'
-#' The integrateIt package performs approximations of integrats.
+#' The integrateIt package performs approximations of integrals.
 #' @name integrateIt
 #' @docType package
 #' @aliases integrateIt-package
