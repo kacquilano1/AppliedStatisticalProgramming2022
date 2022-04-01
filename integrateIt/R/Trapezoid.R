@@ -46,7 +46,7 @@ setGeneric("integrateIt",
           )
 
 #' @export
-setMethod("integrateIt", signiature = "Trapezoid",
+setMethod("integrateIt", signature = "Trapezoid",
           definition = function(object) {
             output <- list(Rule = "Trapezoid", Values = c(object@w, object@y), Result = object@result)
             return(output)
@@ -59,7 +59,7 @@ setGeneric("print",
 )
 
 #' @export
-setMethod("print", signiature = "Trapezoid", definition = function(object) {
+setMethod("print", signature = "Trapezoid", definition = function(object) {
 cat(is(object)[[1]], "\n",
     "  Result: ", object@result, "\n",
     sep = ""
