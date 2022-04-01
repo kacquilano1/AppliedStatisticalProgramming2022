@@ -39,6 +39,11 @@ setMethod("initialize", "Simpson",
             return(value)
           })
 
+#' @export
+setGeneric("integrateIt",
+           function(object)
+             standardGeneric("integrateIt"),
+)
 
 #' @export
 setMethod("integrateIt", signature = "Simpson",
@@ -46,6 +51,12 @@ setMethod("integrateIt", signature = "Simpson",
             output <- list(Rule = "Simpson", Values = c(object@w, object@y), Result = object@result)
             return(output)
           })
+
+#' @export
+setGeneric("print",
+           function(object)
+             standardGeneric("print"),
+)
 
 #' @export
 setMethod("print", signature = "Simpson", definition = function(object) {

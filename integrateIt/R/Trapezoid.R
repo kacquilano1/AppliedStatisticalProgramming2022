@@ -53,6 +53,12 @@ setMethod("integrateIt", signiature = "Trapezoid",
 })
 
 #' @export
+setGeneric("print",
+           function(object)
+             standardGeneric("print"),
+)
+
+#' @export
 setMethod("print", signiature = "Trapezoid", definition = function(object) {
 cat(is(object)[[1]], "\n",
     "  Result: ", object@result, "\n",
