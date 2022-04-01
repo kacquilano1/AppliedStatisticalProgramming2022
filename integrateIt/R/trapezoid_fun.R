@@ -20,9 +20,9 @@
 #' @include trapezoid_fun.R
 #' @aliases trapezoid_fun,ANY-method
 #' @export
-setGeneric(name= "simpson_fun",
+setGeneric(name= "trapezoid_fun",
            def = function(a, b, d, f)
-           {standardGeneric("simpson_fun")})
+           {standardGeneric("trapezoid_fun")})
 
 #' @export
 setMethod(f = "trapezoid_fun",
@@ -47,4 +47,4 @@ setMethod(f = "trapezoid_fun",
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return a list: result of the Trapezoid rule, the start/end values, vector of values, and vector of evaluated values
   return(new("Trapezoid", ab = ab, w = w, y = y, result = Trap))
-  }
+  })

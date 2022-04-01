@@ -2,18 +2,39 @@
 % Please edit documentation in R/print.R
 \name{print}
 \alias{print}
-\alias{print,Simpson-method}
-\alias{print,Trapezoid-method}
-\title{A method for intgrateIt}
+\alias{print,ANY-method}
+\title{Prints the result of integral spproximation}
 \usage{
-print(object)
+print(Rule, a, b, d, f)
 }
 \arguments{
-\item{object}{object of class Simpson or Trapezoid}
+\item{Rule}{defining the rule to be used:Trapezoid or Simpson}
+
+\item{a}{a numeric object of the start value}
+
+\item{b}{a numeric object of the end value}
+
+\item{d}{a numeric object of the number of divisions to be made}
+
+\item{f}{the function}
+}
+\value{
+An object of class Trapezoid or Simpson containing
+\item{result}{the approximated result}
 }
 \description{
-Method of \code{print} is created by the \code{print} function
+Prints result from the Trapezoid and Simpson Rules' calculation of the integral
+}
+\note{
+This produces an object of the Trapezoid or Simpson class
+}
+\examples{
+
+print(Rule = "Simpson", a = 0, b = 10, d = 5, f = sin)
+}
+\seealso{
+\code{\link{trapezoid_fun}}, \code{\link{simpson_fun}}
 }
 \author{
-Kimberly Acquilano: \email{k.a.acquilano@wustl.edu}
+Kimberly Acquilano
 }

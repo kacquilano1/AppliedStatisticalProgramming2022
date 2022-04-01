@@ -2,6 +2,7 @@
 % Please edit documentation in R/trapezoid_fun.R
 \name{trapezoid_fun}
 \alias{trapezoid_fun}
+\alias{trapezoid_fun,ANY-method}
 \title{Numerical Integration Using the Trapezoid Rule}
 \usage{
 trapezoid_fun(a, b, d, f)
@@ -16,7 +17,11 @@ trapezoid_fun(a, b, d, f)
 \item{f}{The function that will be used for integration}
 }
 \value{
-A numerical value
+An object of the Trapezoid class, which has
+\item{ab} {vector of starting and ending values}
+\item{w} {vector internal values}
+\item{y} {vector evaluated values values}
+\item{result} {Trapezoid Rule result}
 }
 \description{
 Numerical Integration Using the Trapezoid Rule

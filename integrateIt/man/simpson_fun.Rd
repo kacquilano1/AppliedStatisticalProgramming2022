@@ -17,7 +17,11 @@ simpson_fun(a, b, d, f)
 \item{f}{The function that will be used for integration}
 }
 \value{
-A numerical value
+An object of the Simpson class, which has
+\item{ab} {vector of starting and ending values}
+\item{w} {vector internal values}
+\item{y} {vector evaluated values values}
+\item{result} {Simpson Rule result}
 }
 \description{
 Numerical Integration Using the Simpson Rule
@@ -27,5 +31,5 @@ f <- function(x) {sin(x)}
 simpson_fun(a = 0, b = 10, d = 5, f)
 }
 \seealso{
-trapezoid_fun
+\code{\link{trapezoid_fun}}
 }

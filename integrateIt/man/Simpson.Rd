@@ -4,7 +4,9 @@
 \name{Simpson-class}
 \alias{Simpson-class}
 \alias{initialize,Simpson-method}
-\alias{integrateIt,Simpson-method}
+\alias{getResult,Simpson-method}
+\alias{getW,Simpson-method}
+\alias{getY,Simpson-method}
 \title{An approximated value object from Simpson Rule}
 \description{
 Object of class \code{Simpson} is created by the \code{simpson_fun} function
@@ -12,11 +14,10 @@ Object of class \code{Simpson} is created by the \code{simpson_fun} function
 \details{
 An object of the class `Simpson' has the following slots:
 \itemize{
-\item \code{result} The approximated value
 \item \code{ab} the start/end values
 \item \code{w} the vector of values
 \item \code{y} the vector of evaluated values
-\item \code{f} the function to be integrated
+\item \code{result} The approximated value
 }
 }
 \author{

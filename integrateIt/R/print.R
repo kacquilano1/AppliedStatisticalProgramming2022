@@ -1,33 +1,37 @@
-#' A method for intgrateIt
+#' Prints the result of integral spproximation
 #'
-#'Method of \code{print} is created by the \code{print} function
+#' Prints result from the Trapezoid and Simpson Rules' calculation of the integral
 #'
+#' @param Rule defining the rule to be used:Trapezoid or Simpson
+#' @param a a numeric object of the start value
+#' @param b a numeric object of the end value
+#' @param d a numeric object of the number of divisions to be made
+#' @param f the function
 #'
+#' @return An object of class Trapezoid or Simpson containing
+#'  \item{result}{the approximated result}
+#' @author Kimberly Acquilano
+#' @note This produces an object of the Trapezoid or Simpson class
+#' @examples
 #'
-#' @import methods
-#' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases print,Simpson-method print,Trapezoid-method
+#' print(Rule = "Simpson", a = 0, b = 10, d = 5, f = sin)
+#' @seealso \code{\link{trapezoid_fun}}, \code{\link{simpson_fun}}
 #' @rdname print
-#' @param object object of class Simpson or Trapezoid
-#'
+#' @aliases print,ANY-method
 #' @export
-setGeneric("print",
-           function(object)
-             standardGeneric("print"),
+setGeneric(name="print",
+           def=function(Rule, a, b, d, f)
+           standardGeneric("print")
 )
 
 #' @export
-setMethod("print", signature = "Simpson", definition = function(object) {
-  cat(is(object)[[1]], "\n",
-      "  Result: ", object@result, "\n",
-      sep = ""
-  )
-})
-
-#' @export
-setMethod("print", signature = "Trapezoid", definition = function(object) {
-  cat(is(object)[[1]], "\n",
-      "  Result: ", object@result, "\n",
-      sep = ""
-  )
-})
+setMethod(f="print",
+          definition=function(Rule, a, b, d, f){
+            if (Rule == "Trapezoid") {
+              .result <- getResult(trapezoid_fun(a, b, d, f))
+              return(new("Trapezoid", result = .result))
+            } else if (Rule == "Simspon") {
+              .result <- getResult(simpson_fun(a, b, d, f))
+              return(new("Simpson", result = .result))
+            }
+          })
