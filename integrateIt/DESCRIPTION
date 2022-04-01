@@ -17,5 +17,6 @@ Collate:
     'Simpson.R'
     'Trapezoid.R'
     'integrateIt-package.R'
+    'print.R'
     'simpson_fun.R'
     'trapezoid_fun.R'

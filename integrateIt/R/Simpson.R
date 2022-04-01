@@ -1,6 +1,6 @@
 #' An approximated value object from Simpson Rule
 #'
-#' Object of class \code{Smpson} is created by the \code{simpson_fun} function
+#' Object of class \code{Simpson} is created by the \code{simpson_fun} function
 #'
 #'
 #' An object of the class `Simpson' has the following slots:
@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Simpson-class initialize,Simpson-method integrateIt,Simpson-method print,Simpson-method
+#' @aliases Simpson-class initialize,Simpson-method integrateIt,Simpson-method
 #' @rdname Simpson
 #' @export
 setClass(Class="Simpson",
@@ -52,19 +52,9 @@ setMethod("integrateIt", signature = "Simpson",
             return(output)
           })
 
-#' @export
-setGeneric("print",
-           function(object)
-             standardGeneric("print"),
-)
 
-#' @export
-setMethod("print", signature = "Simpson", definition = function(object) {
-  cat(is(object)[[1]], "\n",
-      "  Result: ", object@result, "\n",
-      sep = ""
-  )
-})
+
+
 
 #' @export
 setValidity("Simpson", function(object) {

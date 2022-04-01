@@ -5,10 +5,9 @@
 \alias{Simpson-class}
 \alias{initialize,Simpson-method}
 \alias{integrateIt,Simpson-method}
-\alias{print,Simpson-method}
 \title{An approximated value object from Simpson Rule}
 \description{
-Object of class \code{Smpson} is created by the \code{simpson_fun} function
+Object of class \code{Simpson} is created by the \code{simpson_fun} function
 }
 \details{
 An object of the class `Simpson' has the following slots:

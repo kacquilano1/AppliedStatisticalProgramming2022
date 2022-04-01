@@ -14,7 +14,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method print,Trapezoid-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method
 #' @rdname Trapezoid
 #' @export
 setClass(Class="Trapezoid",
@@ -48,13 +48,6 @@ setMethod("integrateIt", signature = "Trapezoid",
 })
 
 
-#' @export
-setMethod("print", signature = "Trapezoid", definition = function(object) {
-cat(is(object)[[1]], "\n",
-    "  Result: ", object@result, "\n",
-    sep = ""
-)
-})
 
 #' @export
 setValidity("Trapezoid", function(object) {
