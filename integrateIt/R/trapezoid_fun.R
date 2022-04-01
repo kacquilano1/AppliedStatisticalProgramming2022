@@ -6,10 +6,10 @@
 #' @param f The function that will be used for integration
 #'
 #' @return An object of the Trapezoid class, which has
-#' \item{ab} {vector of starting and ending values}
-#' \item{w} {vector internal values}
-#' \item{y} {vector evaluated values values}
-#' \item{result} {Trapezoid Rule result}
+#' \item{ab}{vector of starting and ending values}
+#' \item{w}{vector internal values}
+#' \item{y}{vector evaluated values values}
+#' \item{result}{Trapezoid Rule result}
 #'
 #' @examples
 #' f <- function(x) {sin(x)}

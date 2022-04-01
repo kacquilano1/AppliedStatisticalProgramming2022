@@ -18,10 +18,10 @@ simpson_fun(a, b, d, f)
 }
 \value{
 An object of the Simpson class, which has
-\item{ab} {vector of starting and ending values}
-\item{w} {vector internal values}
-\item{y} {vector evaluated values values}
-\item{result} {Simpson Rule result}
+\item{ab}{vector of starting and ending values}
+\item{w}{vector internal values}
+\item{y}{vector evaluated values values}
+\item{result}{Simpson Rule result}
 }
 \description{
 Numerical Integration Using the Simpson Rule
