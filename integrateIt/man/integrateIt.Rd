@@ -6,7 +6,7 @@
 \alias{integrateIt-package}
 \title{integrateIt}
 \description{
-The integrateIt package performs approximations of integrats.
+The integrateIt package performs approximations of integrals.
 }
 \examples{
 

@@ -4,9 +4,8 @@
 \name{Trapezoid-class}
 \alias{Trapezoid-class}
 \alias{initialize,Trapezoid-method}
-\alias{integratIt-generic}
 \alias{integrateIt,Trapezoid-method}
-\alias{show,Trapezoid-method}
+\alias{print,Trapezoid-method}
 \title{An approximated value object from Trapezoid Rule}
 \description{
 Object of class \code{Trapezoid} is created by the \code{trapezoid_fun} function

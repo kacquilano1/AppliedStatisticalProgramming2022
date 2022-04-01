@@ -39,11 +39,6 @@ setMethod("initialize", "Trapezoid",
             return(value)
           })
 
-#' @export
-setGeneric("integrateIt",
-           function(object)
-             standardGeneric("integrateIt"),
-          )
 
 #' @export
 setMethod("integrateIt", signature = "Trapezoid",
@@ -52,11 +47,6 @@ setMethod("integrateIt", signature = "Trapezoid",
             return(output)
 })
 
-#' @export
-setGeneric("print",
-           function(object)
-             standardGeneric("print"),
-)
 
 #' @export
 setMethod("print", signature = "Trapezoid", definition = function(object) {
