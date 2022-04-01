@@ -5,17 +5,28 @@
 #' @param d The number of divisions
 #' @param f The function that will be used for integration
 #'
-#' @return A numerical value
+#' @return An object of the Simpson class, which has
+#' \item{ab} {vector of starting and ending values}
+#' \item{w} {vector internal values}
+#' \item{y} {vector evaluated values values}
+#' \item{result} {Simpson Rule result}
 #
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
 #' simpson_fun(a = 0, b = 10, d = 5, f)
-#' @seealso trapezoid_fun
+#' @seealso \code{\link{trapezoid_fun}}
 #' @rdname simpson_fun
 #' @include simpson_fun.R
+#' @aliases simpson_fun,ANY-method
 #' @export
-simpson_fun <- function(a, b, d, f) {
+setGeneric(name= "simpson_fun",
+           def = function(a, b, d, f)
+             {standardGeneric("simpson_fun")})
+
+#' @export
+setMethod(f = "simpson_fun",
+          definition =  function(a, b, d, f) {
   #Based on Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   #Create a vector of start and end values, which will be used for the function's output
   ab <- c(a, b)
@@ -45,5 +56,5 @@ simpson_fun <- function(a, b, d, f) {
   #In other words if there are 5 divisions from the numbers 0 to 10 the functions would be f(0) + 4f(2) + 2f(4) + 4f(6) + 2f(8) + f(10)
   Simp <- (h / 3) * (f(a) + (4 * sum(f(x_n_odd))) + (2 * sum(f(x_n_even)))  + f(b))
   #Return a list: result of the Simpson rule, the start/end values, vector of values, and vector of evaluated values
-  return(list(result = Simp, ab = ab, w = w, y = y))
-}
+  return(new("Simpson", ab = ab, w = w, y = y, result = Simp))
+})

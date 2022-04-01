@@ -5,7 +5,11 @@
 #' @param d The number of divisions
 #' @param f The function that will be used for integration
 #'
-#' @return A numerical value
+#' @return An object of the Trapezoid class, which has
+#' \item{ab} {vector of starting and ending values}
+#' \item{w} {vector internal values}
+#' \item{y} {vector evaluated values values}
+#' \item{result} {Trapezoid Rule result}
 #'
 #' @examples
 #' f <- function(x) {sin(x)}
@@ -14,8 +18,15 @@
 #' @seealso simpson_fun
 #' @rdname trapezoid_fun
 #' @include trapezoid_fun.R
+#' @aliases trapezoid_fun,ANY-method
 #' @export
-trapezoid_fun <- function(a, b, d, f) {
+setGeneric(name= "simpson_fun",
+           def = function(a, b, d, f)
+           {standardGeneric("simpson_fun")})
+
+#' @export
+setMethod(f = "trapezoid_fun",
+          definition =  function(a, b, d, f) {
   #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
   #Create a vector of start and end values, which will be used for the function's output
   ab <- c(a, b)
@@ -35,5 +46,5 @@ trapezoid_fun <- function(a, b, d, f) {
   #This will only multiply the inner values by two, leaving the end points as they are
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return a list: result of the Trapezoid rule, the start/end values, vector of values, and vector of evaluated values
-  return(list(result = Trap, ab = ab, w = w, y = y))
+  return(new("Trapezoid", ab = ab, w = w, y = y, result = Trap))
   }

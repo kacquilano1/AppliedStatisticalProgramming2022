@@ -2,6 +2,7 @@
 % Please edit documentation in R/simpson_fun.R
 \name{simpson_fun}
 \alias{simpson_fun}
+\alias{simpson_fun,ANY-method}
 \title{Numerical Integration Using the Simpson Rule}
 \usage{
 simpson_fun(a, b, d, f)

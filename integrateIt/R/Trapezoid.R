@@ -5,30 +5,29 @@
 #'
 #' An object of the class `Trapezoid' has the following slots:
 #' \itemize{
-#' \item \code{result} The approximated value
 #' \item \code{ab} the start/end values
 #' \item \code{w} the vector of values
 #' \item \code{y} the vector of evaluated values
-#' \item \code{f} the function to be integrated
+#' \item \code{result} The approximated value
 #' }
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt,Trapezoid-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method getResult,Trapezoid-method getW,Trapezoid-method getY,Trapezoid-method
 #' @rdname Trapezoid
 #' @export
 setClass(Class="Trapezoid",
          representation = representation(
-           result = "numeric",
            ab = "numeric",
            w = "numeric",
-           y = "numeric"
-           ),
+           y = "numeric",
+           result = "numeric"
+         ),
          prototype = prototype(
-           result = NA_real_,
            ab = NA_real_,
            w = NA_real_,
-           y = NA_real_
+           y = NA_real_,
+           result = NA_real_
            )
 )
 
@@ -41,12 +40,23 @@ setMethod("initialize", "Trapezoid",
 
 
 #' @export
-setMethod("integrateIt", signature = "Trapezoid",
+setMethod("getResult", signature = "Trapezoid",
           definition = function(object) {
-            output <- list(Rule = "Trapezoid", Values = c(object@w, object@y), Result = object@result)
-            return(output)
-})
+            return(object@result)
+      })
 
+#' @export
+setMethod("getW", signature = "Trapezoid",
+          definition = function(object) {
+            return(object@w)
+          })
+
+
+#' @export
+setMethod("getY", signature = "Trapezoid",
+          definition = function(object) {
+            return(object@y)
+          })
 
 
 #' @export
