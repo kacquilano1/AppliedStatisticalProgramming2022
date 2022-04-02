@@ -28,6 +28,3 @@ setMethod("getResult",
             #feed into the integrateIt and print methods
             return(object@result)
           })
-
-
-
