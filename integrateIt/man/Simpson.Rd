@@ -12,7 +12,7 @@ Object of class \code{Simpson} is created by the \code{simpson_fun} function
 An object of the class `Simpson' has the following slots:
 \itemize{
 \item \code{ab} the start/end values
-\item \code{w} the vector of values
+\item \code{x} the vector of values
 \item \code{y} the vector of evaluated values
 \item \code{result} The approximated value
 }

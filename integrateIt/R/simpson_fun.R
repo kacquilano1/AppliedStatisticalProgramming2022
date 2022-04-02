@@ -13,8 +13,7 @@
 #
 #'
 #' @examples
-#' f <- function(x) {sin(x)}
-#' simpson_fun(a = 0, b = 10, d = 5, f)
+#' simpson_fun(a = 0, b = 10, d = 5, f = sin)
 #' @seealso \code{\link{trapezoid_fun}}
 #' @rdname simpson_fun
 #' @include simpson_fun.R

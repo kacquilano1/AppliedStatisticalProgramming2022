@@ -19,7 +19,7 @@ trapezoid_fun(a, b, d, f)
 \value{
 An object of the Trapezoid class, which has
 \item{ab}{vector of starting and ending values}
-\item{w}{vector internal values}
+\item{x}{vector internal values}
 \item{y}{vector evaluated values values}
 \item{result}{Trapezoid Rule result}
 }
@@ -27,8 +27,7 @@ An object of the Trapezoid class, which has
 Numerical Integration Using the Trapezoid Rule
 }
 \examples{
-f <- function(x) {sin(x)}
-trapezoid_fun(a = 0, b = 10, d = 5, f)
+#' trapezoid_fun(a = 0, b = 10, d = 5, f = sin)
 
 }
 \seealso{

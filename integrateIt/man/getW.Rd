@@ -12,7 +12,7 @@ getW(object)
 }
 \value{
 An object of class Trapezoid or Simpson containing
-\item{w}{the vector of values}
+\item{x}{the vector of values}
 }
 \description{
 Gets the vector of values under the curve for the Trapezoid and Simpson Rules' calculation of the integral

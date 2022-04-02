@@ -9,9 +9,10 @@
 #' @param f the function
 #'
 #' @return An object of class Trapezoid or Simpson containing
+#'  \item{result}{the approximated result}
 #'  \item{x}{a vector of values under the integral}
 #'  \item{y}{a vector of evaluated values from x}
-#'  \item{result}{the approximated result}
+#'
 #' @author Kimberly Acquilano
 #' @note This produces an object of the Trapezoid or Simpson class
 #' @examples
@@ -31,12 +32,12 @@ setMethod(f="integrateIt",
           definition=function(Rule, a, b, d, f){
             if (Rule == "Trapezoid") {
               .result <- getResult(trapezoid_fun(a, b, d, f))
-              .x <- getX(trapezoid_fun(a, b, d, f))
+              .x <- getW(trapezoid_fun(a, b, d, f))
               .y <- getY(trapezoid_fun(a, b, d, f))
               return(list("Trapezoid", result = .result, x = .x, y = .y))
             } else if (Rule == "Simpson") {
               .result <- getResult(simpson_fun(a, b, d, f))
-              .x <- getX(simpson_fun(a, b, d, f))
+              .x <- getW(simpson_fun(a, b, d, f))
               .y <- getY(simpson_fun(a, b, d, f))
               return(list("Simpson", result = .result, x = .x, y = .y))
             }

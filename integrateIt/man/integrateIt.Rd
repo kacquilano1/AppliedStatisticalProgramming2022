@@ -22,9 +22,9 @@ integrateIt(Rule, a, b, d, f)
 }
 \value{
 An object of class Trapezoid or Simpson containing
-\item{w}{a vector of values under the integral}
-\item{y}{a vector of evaluated values from w}
 \item{result}{the approximated result}
+\item{x}{a vector of values under the integral}
+\item{y}{a vector of evaluated values from x}
 }
 \description{
 The integrateIt package performs approximations of integrals.

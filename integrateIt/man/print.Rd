@@ -3,7 +3,7 @@
 \name{print}
 \alias{print}
 \alias{print,ANY-method}
-\title{Prints the result of integral spproximation}
+\title{Prints the result of integral approximation}
 \usage{
 print(Rule, a, b, d, f)
 }

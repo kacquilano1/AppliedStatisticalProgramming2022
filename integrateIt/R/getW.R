@@ -10,17 +10,17 @@
 #' @author Kimberly Acquilano
 #' @note This method is used by the integrateIt and print methods
 #' @seealso \code{\link{trapezoid_fun}}, \code{\link{simpson_fun}}, \code{\link{integrateIt}}, \code{\link{print}}
-#' @aliases getX,ANY-method
-#' @rdname getX
+#' @aliases getW,ANY-method
+#' @rdname getW
 #'
 #' @export
-setGeneric("getX",
+setGeneric("getW",
            function(object)
-             standardGeneric("getX")
+             standardGeneric("getW")
 )
 
 #' @export
-setMethod("getX",
+setMethod("getW",
           definition = function(object) {
             return(object@x)
           })
