@@ -27,12 +27,12 @@ An object of class Trapezoid or Simpson containing
 \item{y}{a vector of evaluated values from x}
 }
 \description{
-The integrateIt package performs approximations of integrals.
+The integrateIt package performs approximations of integrals, using the Trapezoid and Simpson rules.
 
 Uses the Trapezoid and Simpson Rules to calculate the integral
 }
 \note{
-This produces an object of the Trapezoid or Simpson class
+This returns outputs from the trapezoid_fun or simpson_fun functions through the get methods
 }
 \examples{
 

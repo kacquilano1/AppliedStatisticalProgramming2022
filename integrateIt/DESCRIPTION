@@ -17,7 +17,7 @@ Collate:
     'Simpson.R'
     'Trapezoid.R'
     'getResult.R'
-    'getW.R'
+    'getX.R'
     'getY.R'
     'integrateIt-package.R'
     'integrateIt.R'

@@ -18,7 +18,6 @@ trapezoid_fun(a, b, d, f)
 }
 \value{
 An object of the Trapezoid class, which has
-\item{ab}{vector of starting and ending values}
 \item{x}{vector internal values}
 \item{y}{vector evaluated values values}
 \item{result}{Trapezoid Rule result}

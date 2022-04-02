@@ -1,6 +1,6 @@
-#' Gets the vector of evaluated values (y) under the integral
+#' Gets the vector of evaluated values under the integral
 #'
-#' Gets the vector of evaluated values (y) under the curve for the Trapezoid and Simpson Rules' calculation of the integral
+#' Gets the vector of evaluated values under the curve for the Trapezoid and Simpson Rules' calculation of the integral
 #'
 #' @param object An object of class Simpson or Trapezoid
 #'

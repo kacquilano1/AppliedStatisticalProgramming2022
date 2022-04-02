@@ -34,12 +34,10 @@ setMethod(f="print",
               #The return will be a list with the name of the rule used and the corresponding result
               return(list("Trapezoid", result = .result))
             } else if (Rule == "Simpson") {
-              #If the user type "Simpson" use the process described above, using the simpson_fun function
               .result <- getResult(simpson_fun(a, b, d, f))
               return(list("Simpson", result = .result))
             } else {
               #If the input is not in quotes, misspelled, or is neither of the valid options, return a message
-              return("That is not a valid option, please choose 'Trapezoid' or 'Simpson', \n
-                     be sure the rule name is in quotes")
+              return("That is not a valid option, please choose 'Trapezoid' or 'Simpson'")
             }
           })

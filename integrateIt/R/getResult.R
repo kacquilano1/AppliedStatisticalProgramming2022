@@ -25,7 +25,7 @@ setMethod("getResult",
             #this function allows the getResult method to take only the result output of the applicable class
             #in this case getResult will take the result output from objects that are of class Trapezoid and Simpson
             #essentially this method will allow the result from the simpson_fun and trapezoid_fun functions to
-              #feed into the integrateIt and print methods
+            #feed into the integrateIt and print methods
             return(object@result)
           })
 

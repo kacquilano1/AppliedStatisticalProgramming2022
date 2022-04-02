@@ -26,7 +26,7 @@ An object of class Trapezoid or Simpson containing
 Prints result from the Trapezoid and Simpson Rules' calculation of the integral
 }
 \note{
-This produces an object of the Trapezoid or Simpson class
+This returns the result of the trapezoid_fun or simpson_fun functions by utilizing the getResult method
 }
 \examples{
 

@@ -6,7 +6,6 @@
 #' @param f The function that will be used for integration
 #'
 #' @return An object of the Trapezoid class, which has
-#' \item{ab}{vector of starting and ending values}
 #' \item{x}{vector internal values}
 #' \item{y}{vector evaluated values values}
 #' \item{result}{Trapezoid Rule result}
@@ -27,8 +26,6 @@ setGeneric(name= "trapezoid_fun",
 setMethod(f = "trapezoid_fun",
           definition =  function(a, b, d, f) {
   #Followed Trapezoid rule from https://www.r-bloggers.com/2017/08/the-trapezoidal-rule-of-numerical-integration-in-r/
-  #Create a vector of start and end values, which will be used for the function's output
-  ab <- c(a, b)
   #Define our h:
   h <- (b - a) / d
   #n is a vector of the number of divisions between a and b
@@ -45,5 +42,5 @@ setMethod(f = "trapezoid_fun",
   #This will only multiply the inner values by two, leaving the end points as they are
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return an object of class Trapezoid with the following slots: the start/end values, vector of values, and vector of evaluated values
-  return(new("Trapezoid", ab = ab, x = x, y = y, result = Trap))
+  return(new("Trapezoid", x = x, y = y, result = Trap))
   })
