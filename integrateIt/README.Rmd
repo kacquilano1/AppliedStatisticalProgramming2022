@@ -41,3 +41,15 @@ trapezoid_fun(a = 0, b = 10, d = 5, f)
 ```
 
 The functions will output a numerical estimation for the definite integral approximations.
+
+The package works by taking in arguments:
+a = the start value for an integral to be estimated
+b = the end value for an integral to be estimated
+d = the number of divisions to be estimated
+f = the function being integrated
+
+It passes these arguments through the functions trapezoid_fun or simpson_fun, depending on whether the user wants to use the Trapezoid rule or the Simpson rule for approximation, respectively.
+These functions output objects of their respective class, Trapezoid or Simpson. The outputs include x (the vector of values that were to be evaluated), y (the vector evaluations), and the approximated result.
+The getResult, getX, and getY methods access the results, x, and y, individually from each class.
+integrateIt uses the getResult, getX, and getY methods to output the x, y, and results of the rule approximations.
+print uses getResult to print the name of the rule being utilized and the approximated result.
