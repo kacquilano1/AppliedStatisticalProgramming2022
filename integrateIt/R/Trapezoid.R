@@ -35,3 +35,14 @@ setMethod("initialize", "Trapezoid",
             return(value)
           })
 
+#' @export
+setValidity("Trapezoid", function(object) {
+  #valid test, to ensure the inputs are valid
+  if (length(object@result) != 1) {
+    "@result must be a vector of 1"
+  } else if (length(object@x) != length(object@y)) {
+    "@x and @y must be the same length"
+  } else {
+    TRUE
+  }
+})
