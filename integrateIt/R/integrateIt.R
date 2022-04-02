@@ -2,7 +2,7 @@
 #'
 #' Uses the Trapezoid and Simpson Rules to calculate the integral
 #'
-#' @param Rule defining the rule to be used:Trapezoid or Simpson
+#' @param Rule defining the rule to be used:Trapezoid or Simpson - must use quotes around rule name
 #' @param a a numeric object of the start value
 #' @param b a numeric object of the end value
 #' @param d a numeric object of the number of divisions to be made
@@ -31,13 +31,13 @@ setMethod(f="integrateIt",
           definition=function(Rule, a, b, d, f){
             if (Rule == "Trapezoid") {
               .result <- getResult(trapezoid_fun(a, b, d, f))
-              .w <- getW(trapezoid_fun(a, b, d, f))
+              .x <- getW(trapezoid_fun(a, b, d, f))
               .y <- getY(trapezoid_fun(a, b, d, f))
-              return(list("Trapezoid", result = .result, w = .w, y = .y))
+              return(list("Trapezoid", result = .result, x = .x, y = .y))
             } else if (Rule == "Simpson") {
               .result <- getResult(simpson_fun(a, b, d, f))
-              .w <- getW(simpson_fun(a, b, d, f))
+              .x <- getW(simpson_fun(a, b, d, f))
               .y <- getY(simpson_fun(a, b, d, f))
-              return(list("Simpson", result = .result, w = .w, y = .y))
+              return(list("Simpson", result = .result, x = .x, y = .y))
             }
           })

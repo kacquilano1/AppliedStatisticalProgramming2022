@@ -10,7 +10,7 @@
 integrateIt(Rule, a, b, d, f)
 }
 \arguments{
-\item{Rule}{defining the rule to be used:Trapezoid or Simpson}
+\item{Rule}{defining the rule to be used:Trapezoid or Simpson - must use quotes around rule name}
 
 \item{a}{a numeric object of the start value}
 
