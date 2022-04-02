@@ -18,6 +18,7 @@
 #' @export
 setClass(Class="Simpson",
          representation = representation(
+           #the slots for this class are the outputs of the simpson_fun function
            ab = "numeric",
            x = "numeric",
            y = "numeric",
@@ -41,6 +42,7 @@ setMethod("initialize", "Simpson",
 
 #' @export
 setValidity("Simpson", function(object) {
+  #validity function to ensure the inputs are valid
   if (length(object@ab) != 2) {
     "@ab must be a vector of 2"
   } else if (length(object@x) != length(object@y)) {

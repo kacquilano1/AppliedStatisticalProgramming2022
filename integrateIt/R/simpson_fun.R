@@ -54,6 +54,6 @@ setMethod(f = "simpson_fun",
   #This will only multiply the inner values by four and two, leaving the end points as they are: f(x_0) + 4f(x_1) + 2f(x_2) + ...2f(x_d-1) + f(x_d)
   #In other words if there are 5 divisions from the numbers 0 to 10 the functions would be f(0) + 4f(2) + 2f(4) + 4f(6) + 2f(8) + f(10)
   Simp <- (h / 3) * (f(a) + (4 * sum(f(x_n_odd))) + (2 * sum(f(x_n_even)))  + f(b))
-  #Return a list: result of the Simpson rule, the start/end values, vector of values, and vector of evaluated values
+  #Return an object of the class Simpson with the following slots: the start/end values, vector of values, and vector of evaluated values
   return(new("Simpson", ab = ab, x = x, y = y, result = Simp))
 })

@@ -44,6 +44,6 @@ setMethod(f = "trapezoid_fun",
   #(h/2) * (the function of a + 2 * f(every value of x_n) + f(b)
   #This will only multiply the inner values by two, leaving the end points as they are
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
-  #Return a list: result of the Trapezoid rule, the start/end values, vector of values, and vector of evaluated values
+  #Return an object of class Trapezoid with the following slots: the start/end values, vector of values, and vector of evaluated values
   return(new("Trapezoid", ab = ab, x = x, y = y, result = Trap))
   })

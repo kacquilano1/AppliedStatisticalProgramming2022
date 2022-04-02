@@ -1,6 +1,6 @@
 #' integrateIt
 #'
-#' The integrateIt package performs approximations of integrals.
+#' The integrateIt package performs approximations of integrals, using the Trapezoid and Simpson rules.
 #' @name integrateIt
 #' @docType package
 #' @aliases integrateIt-package
