@@ -16,6 +16,9 @@ Config/testthat/edition: 3
 Collate: 
     'Simpson.R'
     'Trapezoid.R'
+    'getResult.R'
+    'getW.R'
+    'getY.R'
     'integrateIt-package.R'
     'integrateIt.R'
     'print.R'

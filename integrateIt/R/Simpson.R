@@ -13,7 +13,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Simpson-class initialize,Simpson-method getResult,Simpson-method getW,Simpson-method getY,Simpson-method
+#' @aliases Simpson-class initialize,Simpson-method
 #' @rdname Simpson
 #' @export
 setClass(Class="Simpson",
@@ -36,46 +36,6 @@ setMethod("initialize", "Simpson",
           function(.Object, ...){
             value=callNextMethod()
             return(value)
-          })
-
-#' @rdname getResult
-#' @export
-setGeneric("getResult",
-           function(object = "Simpson")
-             standardGeneric("getResult")
-)
-
-#' @export
-setMethod("getResult", signature = "Simpson",
-          definition = function(object) {
-            return(object@result)
-          })
-
-#' @rdname getW
-#' @export
-setGeneric("getW",
-           function(object = "Simpson")
-             standardGeneric("getW")
-)
-
-#' @export
-setMethod("getW", signature = "Simpson",
-          definition = function(object) {
-            return(object@w)
-          })
-
-
-#' @rdname getY
-#' @export
-setGeneric("getY",
-           function(object = "Simpson")
-             standardGeneric("getY")
-)
-
-#' @export
-setMethod("getY", signature = "Simpson",
-          definition = function(object) {
-            return(object@y)
           })
 
 

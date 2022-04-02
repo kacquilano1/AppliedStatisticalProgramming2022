@@ -13,7 +13,7 @@
 #'
 #' @import methods
 #' @author Kimberly Acquilano: \email{k.a.acquilano@@wustl.edu}
-#' @aliases Trapezoid-class initialize,Trapezoid-method getResult,Trapezoid-method getW,Trapezoid-method getY,Trapezoid-method
+#' @aliases Trapezoid-class initialize,Trapezoid-method
 #' @rdname Trapezoid
 #' @export
 setClass(Class="Trapezoid",
@@ -38,25 +38,6 @@ setMethod("initialize", "Trapezoid",
             return(value)
           })
 
-
-#' @export
-setMethod("getResult", signature = "Trapezoid",
-          definition = function(object) {
-            return(object@result)
-      })
-
-#' @export
-setMethod("getW", signature = "Trapezoid",
-          definition = function(object) {
-            return(object@w)
-          })
-
-
-#' @export
-setMethod("getY", signature = "Trapezoid",
-          definition = function(object) {
-            return(object@y)
-          })
 
 
 #' @export

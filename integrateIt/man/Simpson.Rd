@@ -4,9 +4,6 @@
 \name{Simpson-class}
 \alias{Simpson-class}
 \alias{initialize,Simpson-method}
-\alias{getResult,Simpson-method}
-\alias{getW,Simpson-method}
-\alias{getY,Simpson-method}
 \title{An approximated value object from Simpson Rule}
 \description{
 Object of class \code{Simpson} is created by the \code{simpson_fun} function
