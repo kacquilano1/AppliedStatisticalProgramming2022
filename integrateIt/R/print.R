@@ -1,4 +1,4 @@
-#' Prints the result of integral spproximation
+#' Prints the result of integral approximation
 #'
 #' Prints result from the Trapezoid and Simpson Rules' calculation of the integral
 #'

@@ -7,7 +7,7 @@
 #'
 #' @return An object of the Trapezoid class, which has
 #' \item{ab}{vector of starting and ending values}
-#' \item{w}{vector internal values}
+#' \item{x}{vector internal values}
 #' \item{y}{vector evaluated values values}
 #' \item{result}{Trapezoid Rule result}
 #'
@@ -37,8 +37,8 @@ setMethod(f = "trapezoid_fun",
   #x_n is a vector of the values for each division between a and b
   #Example if a=0 and b=10 and d=5, x_n will be the values 2,4,6,8
   x_n <- a + (n * h)
-  #Create a vector w, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
-  w = c(a, x_n, b)
+  #Create a vector x, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
+  x = c(a, x_n, b)
   #Create a vector y, which will be a vector containing all of the values evaluated by the function, which will be a part of the output
   y = c(f(a), 2*f(x_n), f(b))
   #Trapezoid function
@@ -46,5 +46,5 @@ setMethod(f = "trapezoid_fun",
   #This will only multiply the inner values by two, leaving the end points as they are
   Trap <- (h / 2) * (f(a) + (2 * sum(f(x_n)))  + f(b))
   #Return a list: result of the Trapezoid rule, the start/end values, vector of values, and vector of evaluated values
-  return(new("Trapezoid", ab = ab, w = w, y = y, result = Trap))
+  return(new("Trapezoid", ab = ab, x = x, y = y, result = Trap))
   })

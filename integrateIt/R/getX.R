@@ -5,24 +5,24 @@
 #' @param object An object of class Simpson or Trapezoid
 #'
 #' @return An object of class Trapezoid or Simpson containing
-#' \item{w}{the vector of values}
+#' \item{x}{the vector of values}
 #'
 #' @author Kimberly Acquilano
 #' @note This method is used by the integrateIt and print methods
 #' @seealso \code{\link{trapezoid_fun}}, \code{\link{simpson_fun}}, \code{\link{integrateIt}}, \code{\link{print}}
-#' @aliases getW,ANY-method
-#' @rdname getW
+#' @aliases getX,ANY-method
+#' @rdname getX
 #'
 #' @export
-setGeneric("getW",
+setGeneric("getX",
            function(object)
-             standardGeneric("getW")
+             standardGeneric("getX")
 )
 
 #' @export
-setMethod("getW",
+setMethod("getX",
           definition = function(object) {
-            return(object@w)
+            return(object@x)
           })
 
 

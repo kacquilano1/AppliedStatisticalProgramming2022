@@ -7,7 +7,7 @@
 #'
 #' @return An object of the Simpson class, which has
 #' \item{ab}{vector of starting and ending values}
-#' \item{w}{vector internal values}
+#' \item{x}{vector internal values}
 #' \item{y}{vector evaluated values values}
 #' \item{result}{Simpson Rule result}
 #
@@ -46,8 +46,8 @@ setMethod(f = "simpson_fun",
   #These vectors will allow for only the inner odd values to be multiplied by 4, and the inner even values to be multiplied by 2
   x_n_odd <- a + (n_odd * h)
   x_n_even <- a + (n_even *h)
-  #Create a vector w, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
-  w = c(a, x_n_odd, x_n_even, b)
+  #Create a vector x, which will be a vector containing all of the values to be evaluted by the function, and will be in the output
+  x = c(a, x_n_odd, x_n_even, b)
   #Create a vector y, which will be a vector containing all of the values evaluated by the function, which will be a part of the output
   y = c(f(a), 4*f(x_n_odd), 2*f(x_n_even), f(b))
   #Simpson function
@@ -56,5 +56,5 @@ setMethod(f = "simpson_fun",
   #In other words if there are 5 divisions from the numbers 0 to 10 the functions would be f(0) + 4f(2) + 2f(4) + 4f(6) + 2f(8) + f(10)
   Simp <- (h / 3) * (f(a) + (4 * sum(f(x_n_odd))) + (2 * sum(f(x_n_even)))  + f(b))
   #Return a list: result of the Simpson rule, the start/end values, vector of values, and vector of evaluated values
-  return(new("Simpson", ab = ab, w = w, y = y, result = Simp))
+  return(new("Simpson", ab = ab, x = x, y = y, result = Simp))
 })

@@ -6,7 +6,7 @@
 #' An object of the class `Simpson' has the following slots:
 #' \itemize{
 #' \item \code{ab} the start/end values
-#' \item \code{w} the vector of values
+#' \item \code{x} the vector of values
 #' \item \code{y} the vector of evaluated values
 #' \item \code{result} The approximated value
 #' }
@@ -19,13 +19,13 @@
 setClass(Class="Simpson",
          representation = representation(
            ab = "numeric",
-           w = "numeric",
+           x = "numeric",
            y = "numeric",
            result = "numeric"
          ),
          prototype = prototype(
            ab = NA_real_,
-           w = NA_real_,
+           x = NA_real_,
            y = NA_real_,
            result = NA_real_
          )
@@ -43,8 +43,8 @@ setMethod("initialize", "Simpson",
 setValidity("Simpson", function(object) {
   if (length(object@ab) != 2) {
     "@ab must be a vector of 2"
-  } else if (length(object@w) != length(object@y)) {
-    "@w and @y must be the same length"
+  } else if (length(object@x) != length(object@y)) {
+    "@x and @y must be the same length"
   } else {
     TRUE
   }
