@@ -11,7 +11,7 @@
 #' @return An object of class Trapezoid or Simpson containing
 #'  \item{result}{the approximated result}
 #'  \item{x}{a vector of values under the integral}
-#'  \item{y}{a vector of evaluated values from x}
+#'  \item{y}{a vector of evaluated values}
 #'
 #' @author Kimberly Acquilano
 #' @note This returns outputs from the trapezoid_fun or simpson_fun functions through the get methods
