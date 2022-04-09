@@ -18,7 +18,8 @@
 #'
 #' #' @examples
 #'
-#'
+#' estimatePois(1:10, "bootstrap", 10)
+#' estimatePois(1:10, "basic", 10)
 #' @seealso PoisMLE-class
 #' @rdname estimatePois
 #' @aliases estimatePois,ANY-method

@@ -32,4 +32,7 @@ PoisMLE-class
 Kimberly Acquilano
 
 #' @examples
+
+estimatePois(1:10, "bootstrap", 10)
+estimatePois(1:10, "basic", 10)
 }
