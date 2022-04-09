@@ -1,3 +1,4 @@
+#Test that basic functions in PoisMLE work: multiplication, addition, subtraction, division.
 test_that("multiplication works", {
   expect_equal(2 * 2, 4)
 })

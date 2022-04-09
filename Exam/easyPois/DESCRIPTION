@@ -1,10 +1,10 @@
 Package: easyPois
-Title: Uses the Poisson Distribution to estimate lambda for a set of observed data
+Title: An easy Poisson estimating model
 Version: 0.0.0.9000
 Authors@R: 
     person("Kimberly", "Acquilano", , "k.a.acquilano@wustl.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package allows the user to estimate the maximum likelihood, log likelkihood, and standard error for the set of observed data.
+Description: This package allows the user to estimate the maximum likelihood, log likelkihood, and standard error for the set of observed data in a Poisson distribution.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
