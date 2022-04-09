@@ -86,16 +86,12 @@ setMethod(f="estimatePois",
 
               #Calculate the SE, using the same formula as in basic SE
               SE <- sqrt(MLE/n)
-            } else {
-              error("SEtype is invalid. Must be basic or bootstrap")
+            } else {stop("Error: SEtype is invalid. Must be basic or bootstrap")
             }
 
           #Return an object that is of class PoisMLE
               #This will output the original data, MLE, LL, SE, and SEtype
               return(new("PoisMLE", y = y, MLE = MLE, LL = LL, SE = SE, SEtype = SEtype))
-
-
-
 
 
 })
