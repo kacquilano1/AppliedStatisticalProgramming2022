@@ -42,3 +42,14 @@ setMethod("initialize", "PoisMLE",
           })
 
 
+#Validity test on class PoisMLE
+#' @export
+setValidity("PoisMLE", function(object) {
+ #First check that the input for y is a vector of more than 1 element
+ if (length(object@y) <= 1) {"y must be a vector of more than 1 element"
+ } else if (length(object@MLE) != 1) {"MLE must be a vector of 1"
+ } else if (length(object@LL) != 1) {"LL must be a vector of 1"
+ } else if (length(object@SE) != 1) {"SE must be a vector of 1"
+         } else {TRUE}
+})
+
