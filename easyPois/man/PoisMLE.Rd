@@ -3,7 +3,7 @@
 \docType{class}
 \name{PoisMLE-class}
 \alias{PoisMLE-class}
-\alias{initialize,estimatePois-method,SEtype-method}
+\alias{initialize,PoisMLE-method}
 \title{An object using the Poisson Distribution}
 \description{
 Objects of class \code{PoisMLE} are created by the \code{estimatePois} function

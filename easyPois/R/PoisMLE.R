@@ -14,7 +14,7 @@
 #'
 #' @author Kimberly Acquilano \email{k.a.acquilano@@wustl.edu}
 #' @import methods
-#' @aliases PoisMLE-class initialize,estimatePois-method,SEtype-method
+#' @aliases PoisMLE-class initialize,PoisMLE-method
 #' @rdname PoisMLE
 #' @export
 setClass(Class="PoisMLE",
@@ -41,9 +41,4 @@ setMethod("initialize", "PoisMLE",
             return(value)
           })
 
-#' @export
-setMethod(f = "print",
-          signature(x = "PoisMLE"),
-          definition = function(x) {
-            print(x@MLE, x@LL, x@SE, x@SEtype)
-          })
+

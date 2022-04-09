@@ -4,6 +4,7 @@
 #'
 #' @param y A vector of values
 #' @param SEtype The method used to calculate the standard error: basic or bootstrap
+#' @param B The number of bootstrapped resamplings
 #'
 #'
 #' @return Returns an object of class \code{'PoisMLE'}, which contains:
@@ -24,13 +25,13 @@
 #'
 #' @export
 setGeneric(name="estimatePois",
-           def=function(y, SEtype)
+           def=function(y, SEtype, B)
            {standardGeneric("estimatePois")}
 )
 
 #' @export
 setMethod(f="estimatePois",
-          definition=function(y, SEtype){
+          definition=function(y, SEtype, B){
 
             #Create a value for the number of observations in the vector y
             #This value will be used for the LL, MLE, and SE functions
@@ -43,9 +44,8 @@ setMethod(f="estimatePois",
             #Create the LL function, which will calculated the log likelihood for the data.
             #This function will use the MLE calculated above as the estimated lambda, the n calculated above, and the origianl data input as y
             #The function is  - [n * MLE] - sum(ln(y!)) - [ln(MLE)*sum(y)]
-            LL <- function(y, n, MLE) {
               #Calculate the first term
-              #Multiply it by -1 to turn it negative
+                #Multiply it by -1 to turn it negative
               first <- n * MLE * (-1)
 
               #Calculate the second term
@@ -60,18 +60,39 @@ setMethod(f="estimatePois",
               #The natural log of MLE * sum of y
               third <- log(MLE) * sum(y)
 
-              #Result is the LL(MLE) = first - second + third
-              result <- first - second + third
+              #return LL(MLE) = first - second + third
+              LL <- first - second + third
 
-              #return the result
-              return(result)
-            }#End of LL function
 
             #Calculate the standard error of the MLE
-            #There will be two different possible calculations, depending on which SEtype the user put in
-            SE <- if (SEtype == "basic") {
+              #There will be two different possible calculations, depending on which SEtype the user put in
+            if (SEtype == "basic") {
+              #if the user chooses basic, then SE will be calculated as the square root of (MLE / n)
+              #This will be saved as SE
+              SE <- sqrt(MLE/n)
+            } else if (SEtype == "bootstrap") {
+              #Create a matrix, matB, of samples. matB will have dimensions n x B
+                #follow the example of how to bootstrap here:https://stats.oarc.ucla.edu/r/library/r-library-introduction-to-bootstrapping/
+                #B is the number of samples from y data, with replacement, samples are size n
+                #Use sapply here to extract B number of n samples, sapply will turn this into a matrix
+                #function(i) for each time 1 through B
+                #Set replace to TRUE for replacement
+              matB <- sapply(1:B, function(i) sample(y, n, replace = TRUE))
 
+              #Calculate the MLE for each column of samples
+                #use the apply function, set to 2 for columns
+                #Use the same function as used above in MLE
+              newMLE <- apply(matB, 2, function(i) sum(y)/n)
+
+              #Calculate the SE, using the same formula as in basic SE
+              SE <- sqrt(MLE/n)
+            } else {
+              error("SEtype is invalid. Must be basic or bootstrap")
             }
+
+          #Return an object that is of class PoisMLE
+              #This will output the original data, MLE, LL, SE, and SEtype
+              return(new("PoisMLE", y = y, MLE = MLE, LL = LL, SE = SE, SEtype = SEtype))
 
 
 
