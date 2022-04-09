@@ -81,11 +81,13 @@ setMethod(f="estimatePois",
 
               #Calculate the MLE for each column of samples
                 #use the apply function, set to 2 for columns
-                #Use the same function as used above in MLE
-              newMLE <- apply(matB, 2, function(i) sum(y)/n)
-
-              #Calculate the SE, using the same formula as in basic SE
-              SE <- sqrt(MLE/n)
+                #Use the same function as used above in MLE to get the MLE of each column
+              vectorMLE <- apply(matB, 2, function(i) sum(i)/n)
+                #calculate the newMLE, using the same MLE formula as above
+                #This newMLE is the total MLE for all the bootstrapped samples
+              newMLE <- sum(vectorMLE)/B
+              #Calculate the SE, using the same formula as in basic SE, using newMLE
+              SE <- sqrt(newMLE/n)
             } else {stop("Error: SEtype is invalid. Must be basic or bootstrap")
             }
 
