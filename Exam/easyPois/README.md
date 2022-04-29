@@ -20,36 +20,30 @@ devtools::install_github("johnsontr/AppliedStatisticalProgramming2022")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
 
-``` r
+This is a basic example which shows a Poisson estimate using the basic s.e. calculation, and using the bootstrap calculation
+
+```{r example}
 library(easyPois)
-## basic example code
+estimatePois(y = 1:10, SEtype = "bootstrap", B = 10)
+estimatePois(y = 1:10, SEtype = "basic")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The function estimatePois will output numerical estimations for the Poisson distribution
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+This package works by taking in the following arguments:
+y = A vector of data.
+SEtype = The type of standard errors to be calculated: "basic" or "bootstrap".
+B = The number of bootstrapped samples.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+estimatePois uses these values to calculate the maximium likelihood (MLE) for lambda using the inputted data. It then uses that value to calculate the log likelihood for the data, conditioned on the lambda calculated as MLE. It calculated the standard errors for the data using either a basic calculation or bootstrapping the calculation, depending on the argument choice.
 
-You can also embed plots, for example:
+estimatePois returns an object of the class PoisMLE.
+This object has the slots:
+y = The original vector of data
+MLE = The maximum likelihood estimator for lambda.
+LL = The log likelihood for the observed data.
+SE = The standard error.
+SEtype = The type of standard errors calculated: "basic" or "bootstrap".
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+the log likelihood of the inputted data. It
